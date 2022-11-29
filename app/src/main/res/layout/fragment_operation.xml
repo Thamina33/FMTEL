@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".fragments.operation.OperationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/small_text"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/txt_clr_grey"
+                android:layout_marginTop="24dp"
+                android:text="Operation"
+                />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#0D03DAC5"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/sale_transaction_his"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_bg"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/trans_his"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/medium_text"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/teal_700"
+                        android:text="Sale Transaction History"
+                        />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="#0D03DAC5"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/payent_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_bg"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/report"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/medium_text"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/teal_700"
+                        android:text="Payment Report"
+                        />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="#0D03DAC5"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/daily_sattlement_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_bg"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/calender_date_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/medium_text"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/teal_700"
+                        android:text="Daily Sattlement"
+                        />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
