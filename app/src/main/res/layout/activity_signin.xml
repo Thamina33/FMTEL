@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_android_black_24dp"
+        android:src="@drawable/logo"
         android:layout_marginTop="96dp"
         android:backgroundTint="@color/white"/>
     <TextView
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/extra_big_text"
         android:text="@string/fm_tel"
-        android:fontFamily="@font/montserrat_subrayada_bold"
+        android:fontFamily="@font/poppins_bold"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"/>

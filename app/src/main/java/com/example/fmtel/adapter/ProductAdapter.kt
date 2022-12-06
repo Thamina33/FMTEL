@@ -4,17 +4,21 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fmtel.R
 import com.example.fmtel.databinding.ItemProductBinding
+import com.example.fmtel.fragments.ProductByPackageFragment
 import com.example.fmtel.model.ProductListResponse.Data.ProductItem
 
 var num =0
  var totalPrice = 0
-class ProductAdapter(private val interaction: Interaction? = null ) :
+class ProductAdapter(private val interaction: Interaction? = null ,
+                     private val fragment: ProductByPackageFragment? = null) :
 
 
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -42,7 +46,8 @@ class ProductAdapter(private val interaction: Interaction? = null ) :
                 false
             ),
             interaction,
-            getBgIage()
+            getBgIage(),
+            fragment
         )
     }
 
@@ -75,7 +80,8 @@ class ProductAdapter(private val interaction: Interaction? = null ) :
     class viewholder(
         itemView: View,
         private val interaction: Interaction?,
-       private  val bgIage: String
+        private val bgIage: String,
+        private val fragment: ProductByPackageFragment?
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: ProductItem) {
@@ -83,19 +89,26 @@ class ProductAdapter(private val interaction: Interaction? = null ) :
 
             binding.packageName.text = item.name
             binding.price.text = item.price
-
-
-
             var productQty = item.quantity
-
-
             binding.counterTxt.text = "${item.quantity}"
 
+            val prc = item.price.toFloat()
+            val qnt = item.quantity.toFloat()
+            val total_prc = prc*qnt
 
             binding.printBtn.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item , "print")
-            }
 
+                if(fragment != null){
+                    if(fragment.getBalance() > total_prc){
+                        interaction?.onItemSelected(adapterPosition, item , "print")
+                    }else {
+                        Toast.makeText(itemView.context , "Your Balance is low" , Toast.LENGTH_LONG).show()
+                    }
+                }else {
+                    Toast.makeText(itemView.context , "Something went wrong." , Toast.LENGTH_LONG).show()
+
+                }
+            }
 
 
             binding.increaseBtn.setOnClickListener {

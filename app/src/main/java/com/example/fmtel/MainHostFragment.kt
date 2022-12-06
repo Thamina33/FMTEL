@@ -1,13 +1,20 @@
 package com.example.fmtel
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.fmtel.databinding.FragmentMainHostBinding
+import com.example.fmtel.model.BalanceResponse
 import com.example.fmtel.model.ContianerPagerAdapter
+import com.example.fmtel.networking.ApiProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainHostFragment : Fragment() {
@@ -45,11 +52,60 @@ class MainHostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
+        loadBAlance()
         binding.fragContainer.adapter = adapter
         binding.fragContainer.isUserInputEnabled = false
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
+
+    }
+
+    private fun loadBAlance() {
+        val  balanceCall  = ApiProvider.dataApi.getBalance()
+        balanceCall.enqueue(object : Callback<BalanceResponse?> {
+            override fun onResponse(
+                call: Call<BalanceResponse?>,
+                response: Response<BalanceResponse?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+                        Log.d("TAG", "onResponse: ${resp.message}")
+                        binding.toolbar.availableBalance.text = resp.data.available
+
+
+
+
+                    }
+
+
+                } else if (response.isSuccessful && response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Token Invalid",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+            override fun onFailure(call: Call<BalanceResponse?>, t: Throwable) {
+
+            }
+
+        })
+
 
     }
 }

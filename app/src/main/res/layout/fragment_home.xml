@@ -11,10 +11,11 @@
 
 
     <ImageView
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/transformation"/>
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRV"
         android:layout_marginTop="24dp"

@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fmtel.MainActivity
 import com.example.fmtel.adapter.BrandAdapter
 import com.example.fmtel.databinding.FragmentTelecommunicationOperatorBinding
+import com.example.fmtel.model.BalanceResponse
 import com.example.fmtel.model.BrandListResponse
 import com.example.fmtel.model.CategoryListResponse
 import com.example.fmtel.networking.ApiProvider
@@ -39,7 +41,7 @@ class TelecommunicationOperatorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        loadBAlance()
         val model = arguments?.getSerializable("model") as CategoryListResponse.CategoryItem?
 
 
@@ -61,6 +63,7 @@ class TelecommunicationOperatorFragment : Fragment() {
     }
 
     private fun loadBrand(id: Int) {
+        (activity as MainActivity).showLoader()
         val  BrandCall  = ApiProvider.dataApi.getBrands(category_id = id.toString())
 
 
@@ -71,6 +74,7 @@ class TelecommunicationOperatorFragment : Fragment() {
                 response: Response<BrandListResponse?>
             ) {
                 // binding.pbar.visibility = View.GONE
+                (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
 
@@ -104,6 +108,55 @@ class TelecommunicationOperatorFragment : Fragment() {
 
 
             override fun onFailure(call: Call<BrandListResponse?>, t: Throwable) {
+
+            }
+
+        })
+
+
+    }
+    private fun loadBAlance() {
+        val  balanceCall  = ApiProvider.dataApi.getBalance()
+        balanceCall.enqueue(object :Callback <BalanceResponse?> {
+            override fun onResponse(
+                call: Call<BalanceResponse?>,
+                response: Response<BalanceResponse?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+                        Log.d("TAG", "onResponse: ${resp.message}")
+
+                        binding.availableBalance.text= resp.data.available
+
+
+
+
+                    }
+
+
+                } else if (response.isSuccessful && response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Token Invalid",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+            override fun onFailure(call: Call<BalanceResponse?>, t: Throwable) {
 
             }
 

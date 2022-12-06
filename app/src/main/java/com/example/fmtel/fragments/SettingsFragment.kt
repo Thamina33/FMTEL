@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentSettingsBinding
@@ -32,6 +33,9 @@ class SettingsFragment : Fragment() {
         binding.pinCode.setOnClickListener {
             findNavController().navigate(R.id.changePinCodeFragment)
         }
-    }
+        binding.testprinter.setOnClickListener {
+            Toast.makeText(requireContext() , "Processing...." , Toast.LENGTH_LONG).show()
+        }
+        }
 
-}
+    }

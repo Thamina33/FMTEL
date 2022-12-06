@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.adapter.ProductAdapter
 import com.example.fmtel.databinding.FragmentProductByPackageBinding
+import com.example.fmtel.model.BalanceResponse
 import com.example.fmtel.model.BrandListResponse
 import com.example.fmtel.model.PackageListResponse
 import com.example.fmtel.model.ProductListResponse
@@ -24,7 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
-
+    var avl_bal = 0.0
     private lateinit var binding: FragmentProductByPackageBinding
     private  lateinit var  mAdapter: ProductAdapter
      var productList: MutableList<ProductListResponse.Data.ProductItem> = mutableListOf()
@@ -33,7 +35,14 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
         savedInstanceState: Bundle?
     ): View? {
        binding = FragmentProductByPackageBinding.inflate(inflater, container, false)
-        mAdapter = ProductAdapter(this)
+
+        return binding.root
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadBAlance()
+        mAdapter = ProductAdapter(this , this)
 
         //passing model
         val model = arguments?.getSerializable("model") as PackageListResponse.Data.PackageItem?
@@ -43,6 +52,10 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
             layoutManager = GridLayoutManager(requireContext() , 2 )
             adapter = mAdapter
         }
+
+
+
+
 
 //
 //        Glide.with(requireContext())
@@ -59,8 +72,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
 
 
-        return binding.root
-        }
+    }
 
     override fun onItemSelected(position: Int, item: ProductListResponse.Data.ProductItem
     , type : String ) {
@@ -94,6 +106,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
     }
 
     private fun loadProduct(id: Int) {
+        (activity as MainActivity).showLoader()
         val  BrandCall  = ApiProvider.dataApi.getProductByPackage(packageID = id.toString())
 
 
@@ -104,6 +117,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                 response: Response<ProductListResponse?>
             ) {
                 // binding.pbar.visibility = View.GONE
+                (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
 
@@ -145,4 +159,58 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
 
 
     }
+
+    private fun loadBAlance() {
+        val  balanceCall  = ApiProvider.dataApi.getBalance()
+        balanceCall.enqueue(object :Callback <BalanceResponse?> {
+            override fun onResponse(
+                call: Call<BalanceResponse?>,
+                response: Response<BalanceResponse?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+                        Log.d("TAG", "onResponse: ${resp.message}")
+
+                        binding.availableBalance.text= resp.data.available
+                        try {
+                            avl_bal = resp.data.available.toDouble()
+                        }catch (e : Exception){}
+
+                    }
+
+
+                } else if (response.isSuccessful && response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Token Invalid",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+            override fun onFailure(call: Call<BalanceResponse?>, t: Throwable) {
+
+            }
+
+        })
+
+
+    }
+
+   fun getBalance() : Double{
+       return avl_bal
+   }
 }

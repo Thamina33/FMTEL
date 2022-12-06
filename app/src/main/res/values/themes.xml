@@ -18,4 +18,6 @@
         <item name="android:color">@color/white</item>
         <item name="android:background">@color/purple_200</item>
     </style>
+
+
 </resources>

@@ -45,4 +45,12 @@ class MainActivity : AppCompatActivity() {
 
     fun loadCategory(){}
 
+    fun showLoader(){
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoader(){
+        binding.progressBar.visibility = View.GONE
+    }
+
 }

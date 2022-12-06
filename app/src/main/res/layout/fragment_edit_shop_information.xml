@@ -54,6 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/shop_name"
                             android:background="@color/white"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
@@ -61,10 +62,11 @@
                             android:inputType="text"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/small_text"
+
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
-                            android:text="بسم الله الرحمن الرحيم"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -80,6 +82,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/owner_name"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -90,7 +93,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
-                            android:text="بسم الله الرحمن الرحيم"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -106,6 +109,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/region_name"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -117,7 +121,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:layout_gravity="start"
-                            android:text="Central Region"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -133,6 +137,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/city"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -144,7 +149,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:layout_gravity="start"
-                            android:text="Riyad"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -160,6 +165,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/district"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -171,7 +177,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:layout_gravity="start"
-                            android:text="Riyad"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -187,6 +193,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/address"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -199,7 +206,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:gravity="top|start"
-                            android:text="بسم الله الرحمن الرحيم"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -215,10 +222,10 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/rep_id"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:background="@color/white"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/small_text"
@@ -226,7 +233,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:layout_gravity="start"
-                            android:text="29"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
                     <TextView
                         android:layout_marginTop="8dp"
@@ -242,6 +249,7 @@
 
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/reg_date"
                             android:layout_marginVertical="4dp"
                             android:layout_marginHorizontal="8dp"
                             android:layout_width="match_parent"
@@ -253,7 +261,7 @@
                             android:textColor="@color/teal_700"
                             android:textStyle="bold"
                             android:layout_gravity="start"
-                            android:text="11/11/2022"/>
+                            android:text=""/>
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
@@ -268,19 +276,21 @@
                 android:layout_marginBottom="32dp"
                 android:layout_height="wrap_content">
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancle_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Cancle"
+                    android:layout_marginRight="4dp"
                     android:fontFamily="@font/poppins_bold"
                     android:textSize="@dimen/small_text"
                     android:backgroundTint="@color/btn_clr"
                     android:textColor="@color/teal_700"
                     android:layout_weight=".5"/>
-                <Space
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content"/>
+
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Update_btn"
                     android:layout_width="0dp"
+                    android:layout_marginLeft="4dp"
                     android:layout_height="wrap_content"
                     android:text="Update"
                     android:fontFamily="@font/poppins_bold"

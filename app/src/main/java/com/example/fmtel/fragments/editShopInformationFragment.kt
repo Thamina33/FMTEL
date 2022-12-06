@@ -5,56 +5,162 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.text.set
+import androidx.navigation.fragment.findNavController
+import com.example.fmtel.MainActivity
 import com.example.fmtel.R
+import com.example.fmtel.databinding.FragmentEditShopInformationBinding
+import com.example.fmtel.model.ProductListResponse
+import com.example.fmtel.model.ShopProfileResponse
+import com.example.fmtel.model.UpdateShopInfo
+import com.example.fmtel.model.salesAdd
+import com.example.fmtel.networking.ApiProvider
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.net.BindException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [editShopInformationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class editShopInformationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentEditShopInformationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_shop_information, container, false)
+
+        binding = FragmentEditShopInformationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment editShopInformationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            editShopInformationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val updateModel = arguments?.getSerializable("profileData") as ShopProfileResponse.Data?
+
+        binding.cancleBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        if (updateModel != null) {
+
+//            val brand_name = binding.shopName.text
+//            val owner_name = binding.ownerName.text
+//            val region = binding.regionName.text
+//            val city = binding.city.text
+//            val district = binding.district.text
+//            val address = binding.address.text
+//            val rep_id = binding.repId.text
+//            val reg = binding.regDate.text
+            binding.shopName.setText(updateModel.brand_name)
+            binding.ownerName.setText(updateModel.owner_name)
+            binding.regionName.setText(updateModel.region)
+            binding.city.setText(updateModel.city)
+            binding.district.setText(updateModel.district)
+            binding.address.setText(updateModel.address)
+            binding.repId.setText(updateModel.user_id.toString())
+            binding.regDate.setText(updateModel.registration_date)
+
+
+
+//            val counter = binding.price.text.toString().toFloat()
+//            val itemPriceInInt = updateModel.quantity.toFloat()
+//            val sstotalPrice = counter * itemPriceInInt
+//
+//            binding.totalPrice.text = sstotalPrice.toString()
+
+            //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
+        } else Toast.makeText(requireContext(), "Null data not found", Toast.LENGTH_LONG).show()
+        binding.UpdateBtn.setOnClickListener {
+
+            val brand_name = binding.shopName.text.toString()
+            val owner_name = binding.ownerName.text.toString()
+            val region = binding.regionName.text.toString()
+            val city = binding.city.text.toString()
+
+            val district = binding.district.text.toString()
+            val address = binding.address.text.toString()
+
+            val user_id = binding.repId.text.toString()
+            val registration_date = binding.regDate.text.toString()
+
+            updateInfo(
+                updateModel?.id.toString(),
+               brand_name.toString(),
+              owner_name.toString(),
+                region.toString(),
+              city.toString(),
+               district.toString(),
+                address.toString(),
+               user_id.toString(),
+               registration_date.toString(),
+
+                )
+
+
+        }
+
+
+}
+    private fun updateInfo(id: String, brand_name: String, owner_name: String,
+                           region: String, city: String,district: String,
+                           address:String, user_id: String, registration_date: String,) {
+        (activity as MainActivity).showLoader()
+        val  updateCall = ApiProvider.dataApi.postShopInfo(id = id,
+           brand_name = brand_name , owner_name = owner_name , region = region , city = city,
+            district = district, address = address, user_id = user_id , registration_date = registration_date
+        )
+
+
+
+        updateCall.enqueue(object : Callback<UpdateShopInfo?> {
+
+            override fun onResponse(
+                call: Call<UpdateShopInfo?>,
+                response: Response<UpdateShopInfo?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                (activity as MainActivity).hideLoader()
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+                        Toast.makeText(
+                            requireContext(),
+                            "Profile Updated",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    }
+                    findNavController().popBackStack()
+
+                } else if (response.isSuccessful && response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
+
             }
+
+
+            override fun onFailure(call: Call<UpdateShopInfo?>, t: Throwable) {
+
+            }
+
+        })
+
+
     }
 }

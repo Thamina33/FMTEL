@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.adapter.BrandAdapter
 import com.example.fmtel.adapter.PackageAdapter
 import com.example.fmtel.databinding.FragmentPackageByBrandBinding
+import com.example.fmtel.model.BalanceResponse
 import com.example.fmtel.model.BrandListResponse
 import com.example.fmtel.model.CategoryListResponse
 import com.example.fmtel.model.PackageListResponse
@@ -38,7 +40,10 @@ class PackageByBrandFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadBAlance()
         val model = arguments?.getSerializable("model") as BrandListResponse.BrandItem?
+
+
 
         packageList = ArrayList()
         val  layoutManager = LinearLayoutManager(context)
@@ -55,6 +60,7 @@ class PackageByBrandFragment : Fragment() {
 
         if(model != null){
             binding.brandName.text = model.name
+
             loadPackage(model.id)
           //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
@@ -62,6 +68,7 @@ class PackageByBrandFragment : Fragment() {
 
     }
     private fun loadPackage(id: Int) {
+        (activity as MainActivity).showLoader()
         val  BrandCall  = ApiProvider.dataApi.getPackageByBrand(brandID = id.toString())
 
 
@@ -72,6 +79,7 @@ class PackageByBrandFragment : Fragment() {
                 response: Response<PackageListResponse?>
             ) {
                 // binding.pbar.visibility = View.GONE
+                (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
 
@@ -81,6 +89,55 @@ class PackageByBrandFragment : Fragment() {
 
                         packageList.addAll(resp.data.packages)
                         packageRVAdapter.notifyDataSetChanged()
+
+
+                    }
+
+
+                } else if (response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Token Invalid",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+            override fun onFailure(call: Call<PackageListResponse?>, t: Throwable) {
+
+            }
+
+        })
+
+
+    }
+    private fun loadBAlance() {
+        val  balanceCall  = ApiProvider.dataApi.getBalance()
+        balanceCall.enqueue(object :Callback <BalanceResponse?> {
+            override fun onResponse(
+                call: Call<BalanceResponse?>,
+                response: Response<BalanceResponse?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+                        Log.d("TAG", "onResponse: ${resp.message}")
+
+                        binding.availableBalance.text= resp.data.available
+
+
 
 
                     }
@@ -104,7 +161,7 @@ class PackageByBrandFragment : Fragment() {
             }
 
 
-            override fun onFailure(call: Call<PackageListResponse?>, t: Throwable) {
+            override fun onFailure(call: Call<BalanceResponse?>, t: Throwable) {
 
             }
 

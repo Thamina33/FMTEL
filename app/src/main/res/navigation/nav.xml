@@ -14,12 +14,6 @@
         <action
             android:id="@+id/action_homeFragment_to_telecommunicationOperatorFragment"
             app:destination="@id/telecommunicationOperatorFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_digitalStoreFragment"
-            app:destination="@id/digitalStoreFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_gamesFragment"
-            app:destination="@id/gamesFragment" />
     </fragment>
     <fragment
         android:id="@+id/telecommunicationOperatorFragment"
@@ -27,107 +21,33 @@
         android:label="fragment_telecommunication_operator"
         tools:layout="@layout/fragment_telecommunication_operator" >
         <action
-            android:id="@+id/action_telecommunicationOperatorFragment_to_operatorPackageFragment"
-            app:destination="@id/operatorPackageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/digitalStoreFragment"
-        android:name="com.example.fmtel.fragments.unused.DigitalStoreFragment"
-        android:label="fragment_digital_store"
-        tools:layout="@layout/fragment_digital_store" >
-        <action
-            android:id="@+id/action_digitalStoreFragment_to_paymentMethodFragment"
-            app:destination="@id/paymentMethodFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/gamesFragment"
-        android:name="com.example.fmtel.fragments.unused.gamesFragment"
-        android:label="fragment_games"
-        tools:layout="@layout/fragment_games" >
-        <action
-            android:id="@+id/action_gamesFragment_to_gamesVersionFragment"
-            app:destination="@id/gamesVersionFragment" />
+            android:id="@+id/action_telecommunicationOperatorFragment_to_packageByBrandFragment"
+            app:destination="@id/packageByBrandFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainHostFragment"
         android:name="com.example.fmtel.MainHostFragment"
         android:label="MainHostFragment" />
-    <fragment
-        android:id="@+id/operatorPackageFragment"
-        android:name="com.example.fmtel.fragments.operation.OperatorPackageFragment"
-        android:label="fragment_operator_package"
-        tools:layout="@layout/fragment_operator_package" >
-        <action
-            android:id="@+id/action_operatorPackageFragment_to_operatorPackageCategoryFragment"
-            app:destination="@id/operatorPackageCategoryFragment" />
-        <action
-            android:id="@+id/action_operatorPackageFragment_to_packageByBrandFragment"
-            app:destination="@id/packageByBrandFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/operatorPackageCategoryFragment"
-        android:name="com.example.fmtel.fragments.operation.OperatorPackageCategoryFragment"
-        android:label="fragment_operator_package_category"
-        tools:layout="@layout/fragment_operator_package_category" >
-        <action
-            android:id="@+id/action_operatorPackageCategoryFragment_to_purshaseOperatorPackageFragment"
-            app:destination="@id/purshaseOperatorPackageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/purshaseOperatorPackageFragment"
-        android:name="com.example.fmtel.fragments.PurshaseOperatorPackageFragment"
-        android:label="fragment_purshase_operator_package"
-        tools:layout="@layout/fragment_purshase_operator_package" />
-    <fragment
-        android:id="@+id/paymentMethodFragment"
-        android:name="com.example.fmtel.fragments.payment.PaymentMethodFragment"
-        android:label="fragment_payment_method"
-        tools:layout="@layout/fragment_payment_method" >
-        <action
-            android:id="@+id/action_paymentMethodFragment_to_paymentMethodPackageFragment"
-            app:destination="@id/paymentMethodPackageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/paymentMethodPackageFragment"
-        android:name="com.example.fmtel.fragments.PaymentMethodPackageFragment"
-        android:label="fragment_payment_method_package"
-        tools:layout="@layout/fragment_payment_method_package" >
-        <action
-            android:id="@+id/action_paymentMethodPackageFragment_to_purshaseOperatorPackageFragment"
-            app:destination="@id/purshaseOperatorPackageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/gamesVersionFragment"
-        android:name="com.example.fmtel.fragments.unused.GamesVersionFragment"
-        android:label="fragment_games_version"
-        tools:layout="@layout/fragment_games_version" >
-        <action
-            android:id="@+id/action_gamesVersionFragment_to_paymentMethodPackageFragment"
-            app:destination="@id/paymentMethodPackageFragment" />
-    </fragment>
+
+
     <fragment
         android:id="@+id/operationFragment"
         android:name="com.example.fmtel.fragments.operation.OperationFragment"
         android:label="fragment_operation"
         tools:layout="@layout/fragment_operation" >
         <action
-            android:id="@+id/action_operationFragment_to_dailySattlementReportFragment"
-            app:destination="@id/dailySattlementReportFragment" />
-        <action
             android:id="@+id/action_operationFragment_to_paymentReportragment"
             app:destination="@id/paymentReportragment" />
         <action
             android:id="@+id/action_operationFragment_to_saleTransactionHistoryFragment"
             app:destination="@id/saleTransactionHistoryFragment" />
+        <action
+            android:id="@+id/action_operationFragment_to_dailysattlementFragment"
+            app:destination="@id/dailysattlementFragment" />
     </fragment>
     <fragment
-        android:id="@+id/dailySattlementReportFragment"
-        android:name="com.example.fmtel.fragments.DailySattlementReportFragment"
-        android:label="fragment_daily_sattlement_report"
-        tools:layout="@layout/fragment_daily_sattlement_report" />
-    <fragment
         android:id="@+id/paymentReportragment"
-        android:name="com.example.fmtel.fragments.payment.PaymentReportragment"
+        android:name="com.example.fmtel.fragments.operation.PaymentReportragment"
         android:label="fragment_payment_reportragment"
         tools:layout="@layout/fragment_payment_reportragment" />
     <fragment
@@ -156,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/terminalBalanceFragment"
-        android:name="com.example.fmtel.fragments.TerminalBalanceFragment"
+        android:name="com.example.fmtel.fragments.payment.TerminalBalanceFragment"
         android:label="fragment_terminal_balance"
         tools:layout="@layout/fragment_terminal_balance" />
     <fragment
@@ -166,7 +86,7 @@
         tools:layout="@layout/fragment_change_pin_code" />
     <fragment
         android:id="@+id/saleTransactionHistoryFragment"
-        android:name="com.example.fmtel.fragments.SaleTransactionHistoryFragment"
+        android:name="com.example.fmtel.fragments.operation.SaleTransactionHistoryFragment"
         android:label="fragment_sale_transaction_history"
         tools:layout="@layout/fragment_sale_transaction_history" />
     <fragment
@@ -197,4 +117,9 @@
         android:name="com.example.fmtel.fragments.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/dailysattlementFragment"
+        android:name="com.example.fmtel.fragments.operation.DailysattlementFragment"
+        android:label="fragment_dailysattlement"
+        tools:layout="@layout/fragment_dailysattlement" />
 </navigation>

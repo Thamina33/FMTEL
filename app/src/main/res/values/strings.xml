@@ -6,7 +6,7 @@
     <string name="pin_code">PIN Code</string>
     <string name="login_id">Login ID</string>
     <string name="fm_tel">FM Tel</string>
-    <string name="available_cash">Available Balance: </string>
+    <string name="available_cash">Available Balance:  </string>
     <string name="more">More</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

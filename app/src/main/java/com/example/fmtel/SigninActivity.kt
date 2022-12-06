@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.example.fmtel.R
@@ -77,21 +78,30 @@ class SigninActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, pass: String) {
+
         val loginCall = ApiProvider.dataApi.user_login(
             email, pass
         )
 
 
 
-        loginCall.enqueue(object : Callback<login_response?> {
+        loginCall.enqueue(object : Callback<login_response?>
+
+        {
+
             override fun onResponse(
+
                 call: Call<login_response?>,
                 response: Response<login_response?>
             ) {
                 // binding.pbar.visibility = View.GONE
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
-
+                    Toast.makeText(
+                        applicationContext,
+                        "Login Successful",
+                        Toast.LENGTH_LONG
+                    ).show()
                     if (resp != null) {
 
                         SharedPrefManager.put(resp.data , userKey)
@@ -102,17 +112,26 @@ class SigninActivity : AppCompatActivity() {
                     }
 
 
-                } else if (response.isSuccessful && response.code() == 401) {
+                }
+                else if ( response.code() == 401) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         applicationContext,
-                        "Username and pass not matched",
+                        "Invalid PINCODE, Please input PIN CODE Correctly",
                         Toast.LENGTH_LONG
                     ).show()
-                } else {
+                }
+                else if ( response.code() == 403) {
                     Toast.makeText(
                         applicationContext,
-                        "Server Error" + { response.code() },
+                        "Invalid Username, Please input Username Correctly",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Invalid Username or PINCODE",
                         Toast.LENGTH_LONG
                     ).show()
                 }

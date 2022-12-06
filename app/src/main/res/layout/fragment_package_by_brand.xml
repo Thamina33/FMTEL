@@ -45,9 +45,10 @@
                     android:textSize="@dimen/small_text"
                     />
                 <TextView
+                    android:id="@+id/available_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text=""
                     android:textColor="@color/white"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="@dimen/small_text"

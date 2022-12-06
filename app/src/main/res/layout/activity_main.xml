@@ -26,6 +26,19 @@
                   app:layout_constraintTop_toTopOf="parent"
                   app:navGraph="@navigation/nav" />
 
+              <ProgressBar
+                  android:layout_width="wrap_content"
+                  android:id="@+id/progressBar"
+                  android:progressBackgroundTint="#E91E63"
+                  android:indeterminate="true"
+                  android:indeterminateTint="#E91E63"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:visibility="gone"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:layout_height="wrap_content"/>
+
 
 
 
