@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fmtel.MainActivity
@@ -64,8 +65,9 @@ class PaymentFragment : Fragment() {
             //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
         binding.printBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "Processing..." , Toast.LENGTH_LONG).show()
+
             sasles_add(itemModel?.id.toString(), itemModel?.price.toString(), itemModel?.quantity.toString())
+
         }
 
     }
@@ -87,7 +89,8 @@ class PaymentFragment : Fragment() {
                 (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
-
+                    Toast.makeText(requireContext(), "Printing..." , Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
 //                    if (resp != null) {
 //
 //                        SharedPrefManager.put(resp.data , userKey)
@@ -98,14 +101,17 @@ class PaymentFragment : Fragment() {
 //                    }
 
 
-                } else if (response.code() == 401) {
+                }
+
+                else if (response.code() == 422) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         requireContext(),
-                        "Server Error",
+                        "This product is already sold!",
                         Toast.LENGTH_LONG
                     ).show()
-                } else {
+                }
+                else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error" + { response.code() },
@@ -172,6 +178,11 @@ class PaymentFragment : Fragment() {
         })
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
     }
 
 }

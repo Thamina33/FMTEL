@@ -213,4 +213,10 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
    fun getBalance() : Double{
        return avl_bal
    }
+
+
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
+    }
 }

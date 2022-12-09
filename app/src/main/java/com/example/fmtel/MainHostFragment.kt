@@ -108,4 +108,8 @@ class MainHostFragment : Fragment() {
 
 
     }
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
+    }
 }

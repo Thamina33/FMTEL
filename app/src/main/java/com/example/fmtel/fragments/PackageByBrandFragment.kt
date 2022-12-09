@@ -169,4 +169,9 @@ class PackageByBrandFragment : Fragment() {
 
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
+    }
 }

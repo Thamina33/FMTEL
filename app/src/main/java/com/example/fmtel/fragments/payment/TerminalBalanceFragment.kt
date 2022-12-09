@@ -84,4 +84,9 @@ private lateinit var binding: FragmentTerminalBalanceBinding
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
+    }
+
 }

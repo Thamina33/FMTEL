@@ -164,4 +164,8 @@ class TelecommunicationOperatorFragment : Fragment() {
 
 
     }
+    override fun onResume() {
+        super.onResume()
+        loadBAlance()
+    }
 }
