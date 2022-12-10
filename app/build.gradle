@@ -57,5 +57,6 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation 'com.github.AhmedElsayed94:SunmiPrinterSdk:1.0.0'
 
 }
