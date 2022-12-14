@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.adapter.SaleTransactionHisAdapter
@@ -34,7 +35,7 @@ class SaleTransactionHistoryFragment : Fragment() , SaleTransactionHisAdapter.In
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val printMe = PrintMe(binding.root.context)
         mAdapter = SaleTransactionHisAdapter(this)
         reportList = ArrayList()
         binding.reportRV.apply {
@@ -101,6 +102,7 @@ class SaleTransactionHistoryFragment : Fragment() , SaleTransactionHisAdapter.In
     }
 
     override fun onItemSelected(position: Int, item: dailySattlementResponse.Data) {
+
 
 
     }

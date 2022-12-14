@@ -26,4 +26,5 @@
     <string name="telecommunication">Telecommunication</string>
     <string name="games">Games</string>
     <string name="app_store_itunes"><![CDATA[App Store & iTunes]]></string>
+    <string name="star_line">**************************************************************************************************************************************</string>
 </resources>

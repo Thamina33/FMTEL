@@ -27,6 +27,7 @@ import retrofit2.Response
 
 class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
     var avl_bal = 0.0
+    private  var repsose : ProductListResponse? = null
     private lateinit var binding: FragmentProductByPackageBinding
     private  lateinit var  mAdapter: ProductAdapter
      var productList: MutableList<ProductListResponse.Data.ProductItem> = mutableListOf()
@@ -74,36 +75,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
 
     }
 
-    override fun onItemSelected(position: Int, item: ProductListResponse.Data.ProductItem
-    , type : String ) {
 
-        if(type == "print"){
-            if(item.quantity == 0){
-                Toast.makeText(requireContext() , "Please Add Quantity to select this" , Toast.LENGTH_LONG).show()
-            }
-            else{
-                val bundle = Bundle()
-                bundle.putSerializable("model" , item)
-                findNavController().navigate(R.id.paymentFragment , bundle)
-            }
-
-        }else if(type == "minus"){
-
-            if(item.quantity > 0 ){
-                val newQuantity = item.quantity -1
-
-                productList[position].quantity = newQuantity
-                mAdapter.notifyItemChanged(position)
-            }
-
-        }else if (type == "add"){
-            val newQuantity = item.quantity + 1
-            productList[position].quantity = newQuantity
-            mAdapter.notifyItemChanged(position)
-        }
-
-
-    }
 
     private fun loadProduct(id: Int) {
         (activity as MainActivity).showLoader()
@@ -122,7 +94,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                     val resp = response.body()
 
                     if (resp != null) {
-
+                        repsose = resp
                         Log.d("TAG", "onResponse: ${resp.message}")
                         productList.clear() ;
                         mAdapter.setBgIage(resp.data.`package`.brand_background_image)
@@ -214,6 +186,39 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
        return avl_bal
    }
 
+    override fun onItemSelected(position: Int, item: ProductListResponse.Data.ProductItem
+                                , type : String ) {
+
+        if(type == "print"){
+            if(item.quantity == 0){
+                Toast.makeText(requireContext() , "Please Add Quantity to select this" , Toast.LENGTH_LONG).show()
+            }
+            else{
+                val bundle = Bundle()
+                bundle.putSerializable("model" , item)
+                bundle.putSerializable("brandmodel" , repsose?.data?.brand)
+                findNavController().navigate(R.id.paymentFragment , bundle)
+            }
+
+        }
+        else if(type == "minus")
+        {
+
+            if(item.quantity > 0 ){
+                val newQuantity = item.quantity -1
+
+                productList[position].quantity = newQuantity
+                mAdapter.notifyItemChanged(position)
+            }
+
+        }else if (type == "add"){
+            val newQuantity = item.quantity + 1
+            productList[position].quantity = newQuantity
+            mAdapter.notifyItemChanged(position)
+        }
+
+
+    }
 
     override fun onResume() {
         super.onResume()

@@ -2,6 +2,7 @@ package com.example.fmtel.fragments
 
 import android.os.Bundle
 import android.util.Log
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,15 +41,25 @@ class PaymentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loadBAlance()
         val  itemModel = arguments?.getSerializable("model") as ProductListResponse.Data.ProductItem?
+        val  brandModel = arguments?.getSerializable("brandmodel") as Brand?
 
+        val printMe = PrintMe(binding.root.context)
+
+        if (brandModel != null){
+
+            binding.packageName.text = brandModel.name
+            binding.invoicePage.BrandName.text = brandModel.name
+            Glide.with(requireContext())
+            .load(brandModel.background_image)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+           .into(binding.backImg);
+        }
 
 
         if(itemModel != null){
             //binding.packageName.text = itemModel.name
             binding.packageId.text = itemModel.name
             binding.price.text = itemModel.price
-
-
             binding.pricee.text = itemModel.quantity.toString()
 
             Glide.with(requireContext())
@@ -59,14 +70,23 @@ class PaymentFragment : Fragment() {
             val counter = binding.price.text.toString().toFloat()
             val itemPriceInInt = itemModel.quantity.toFloat()
             val sstotalPrice = counter * itemPriceInInt
-
             binding.totalPrice.text = sstotalPrice.toString()
+            binding.invoicePage.price.text = sstotalPrice.toString()
+
+            //tid , transaction id, date, serial no, expiry date
+            binding.invoicePage.tid.text = itemModel.code
+            binding.invoicePage.date.text = itemModel.code
+            binding.invoicePage.expiryDate.text = itemModel.code
+            binding.invoicePage.trasactionNo.text = itemModel.code
+            binding.invoicePage.serialNo.text = itemModel.code
+
 
             //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
         binding.printBtn.setOnClickListener {
 
-            sasles_add(itemModel?.id.toString(), itemModel?.price.toString(), itemModel?.quantity.toString())
+         printMe.sendViewToPrinter(binding.invoicePage.printImg)
+         sasles_add(itemModel?.id.toString(), itemModel?.price.toString(), itemModel?.quantity.toString())
 
         }
 
@@ -89,8 +109,7 @@ class PaymentFragment : Fragment() {
                 (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
-                    Toast.makeText(requireContext(), "Printing..." , Toast.LENGTH_LONG).show()
-                    findNavController().popBackStack()
+                     findNavController().popBackStack()
 //                    if (resp != null) {
 //
 //                        SharedPrefManager.put(resp.data , userKey)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentSettingsBinding
 
@@ -24,6 +25,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val printMe = PrintMe(binding.root.context)
         binding.shopProfile.setOnClickListener {
             findNavController().navigate(R.id.shopProfileFragment)
         }
@@ -34,8 +36,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.changePinCodeFragment)
         }
         binding.testprinter.setOnClickListener {
-            Toast.makeText(requireContext() , "Processing...." , Toast.LENGTH_LONG).show()
-        }
-        }
 
+            printMe.sendTextToPrinter("Test Printer" , 32f, true , false , 0)
+//            Toast.makeText(requireContext() , "Processing...." , Toast.LENGTH_LONG).show()
+        }
     }
+
+}

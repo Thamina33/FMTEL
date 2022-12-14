@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.adapter.DailySattlementAdapter
@@ -43,7 +44,7 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val printMe = PrintMe(binding.root.context)
         mAdapter = DailySattlementAdapter(this)
 
       //  val model = arguments?.getSerializable("model") as DailySalesResponse.Data?
@@ -58,7 +59,11 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
 
             loadReport()
 
+        binding.printBtn.setOnClickListener {
+            printMe.sendViewToPrinter(binding.reportRV)
 
+            findNavController().popBackStack()
+        }
 
     }
 

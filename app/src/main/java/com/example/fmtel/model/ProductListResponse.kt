@@ -7,7 +7,8 @@ data class ProductListResponse(
 ) {
     data class Data(
         val `package`: Package,
-        val products: List<ProductItem>
+        val products: List<ProductItem>,
+        val brand: Brand,
     ) {
         data class Package(
             val id: Int,
