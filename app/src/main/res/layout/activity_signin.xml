@@ -35,7 +35,7 @@
         android:layout_marginHorizontal="32dp"
         android:background="@drawable/edittext_bg"
         android:hint="@string/login_id"
-        android:text="admin"
+        android:text=""
         android:paddingHorizontal="12dp"
         android:inputType="text"
         android:textColor="@color/txt_clr"
@@ -54,7 +54,7 @@
         android:background="@drawable/edittext_bg"
         android:gravity="center"
         android:hint="@string/pin_code"
-        android:text="123456"
+        android:text=""
         android:paddingHorizontal="12dp"
         android:inputType="textPassword"
         app:passwordToggleEnabled="true"
@@ -73,4 +73,18 @@
         android:textSize="@dimen/small_text"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="24dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/progressBar"
+        android:progressBackgroundTint="#E91E63"
+        android:indeterminate="true"
+        android:indeterminateTint="#E91E63"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

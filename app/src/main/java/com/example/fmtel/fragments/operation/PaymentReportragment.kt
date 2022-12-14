@@ -13,6 +13,8 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentPaymentReportragmentBinding
@@ -44,7 +46,7 @@ class PaymentReportragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val printMe = PrintMe(binding.root.context)
         binding.startDate.setOnClickListener {
             openDatePcker(
 
@@ -60,15 +62,18 @@ class PaymentReportragment : Fragment() {
         binding.endTime.setOnClickListener {
             endgetTime(requireContext())
         }
-
-
-
         binding.reportBtn.setOnClickListener {
             val start_d = binding.startDate.text.toString()
             val end_d = binding.endDate.text.toString()
             loadReport(start_d, end_d)
 
         }
+        binding.printBtn.setOnClickListener {
+
+            printMe.sendViewToPrinter(binding.reportCard)
+            findNavController().popBackStack()
+        }
+
     }
 
 
@@ -166,6 +171,8 @@ class PaymentReportragment : Fragment() {
                 response: Response<ReportbyDatesResponse?>
             ) {
                 // binding.pbar.visibility = View.GONE
+
+
                 (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
@@ -177,6 +184,10 @@ class PaymentReportragment : Fragment() {
                         Log.d("TAG", "onResponse: ${resp.message}")
 
                         binding.reportCard.visibility = View.VISIBLE
+                        binding.printBtn.visibility = View.VISIBLE
+
+
+
                         binding.tba.text= resp.data.tba
                         binding.totalamount.text=resp.data.sale_amount.toString()
                         binding.currentBalance.text= resp.data.balance
@@ -193,6 +204,7 @@ class PaymentReportragment : Fragment() {
                     ).show()
                 } else if (response.code() == 404) {
                     binding.reportCard.visibility = View.INVISIBLE
+                    binding.printBtn.visibility = View.INVISIBLE
                     Toast.makeText(
                         requireContext(),
                         "No sales available within this period",
@@ -202,7 +214,7 @@ class PaymentReportragment : Fragment() {
                 else{
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Input Data Properly",
                         Toast.LENGTH_LONG
                     ).show()
                 }

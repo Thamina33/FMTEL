@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/small_text"
                     android:fontFamily="@font/poppins_regular"
-                    android:textColor="#FF9800"
+                    android:textColor="#3F51B5"
                     android:text="Number of Cards: "/>
                 <TextView
                     android:layout_marginEnd="4dp"
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/small_text"
                     android:fontFamily="@font/poppins_regular"
-                    android:textColor="#FF9800"
+                    android:textColor="#3F51B5"
                     android:text="122"/>
             </LinearLayout>
 

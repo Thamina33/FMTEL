@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
@@ -49,6 +50,8 @@ class SigninActivity : AppCompatActivity() {
 
         }
 
+
+
 //        if(SharedPrefManager.getToken()!= null){
 //            val intent = Intent(applicationContext, MainActivity::class.java)
 //            startActivity(intent)
@@ -78,6 +81,7 @@ class SigninActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, pass: String) {
+        binding.progressBar.visibility = View.VISIBLE
 
         val loginCall = ApiProvider.dataApi.user_login(
             email, pass
@@ -89,12 +93,13 @@ class SigninActivity : AppCompatActivity() {
 
         {
 
+
             override fun onResponse(
 
                 call: Call<login_response?>,
                 response: Response<login_response?>
             ) {
-                // binding.pbar.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
                     Toast.makeText(
@@ -154,7 +159,17 @@ class SigninActivity : AppCompatActivity() {
         finish()
     }
 
+    fun showLoader(){
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoader(){
+        binding.progressBar.visibility = View.GONE
+    }
+
 }
+
+
 
 
 
