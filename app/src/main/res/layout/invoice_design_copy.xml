@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:visibility="visible"
+        android:id="@+id/print_img"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:background="#ffffff"
+        android:layout_height="wrap_content" 
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+        android:id="@+id/copy"
+        android:includeFontPadding="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2nd Copy"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+
+        android:layout_gravity="center|end"
+        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/Brand_name"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STC"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"/>
+        <TextView
+            android:layout_marginTop="4dp"
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/star_line"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text"
+
+            android:gravity="center"
+           />
+        <TextView
+            android:id="@+id/price"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100.00"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+
+            android:layout_gravity="center"
+           />
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VAT is included 15%"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+
+            android:layout_gravity="center"
+           />
+        <TextView
+            android:layout_marginTop="4dp"
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/star_line"
+             android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text"
+            android:gravity="center"
+           />
+        <LinearLayout
+                android:layout_marginTop="4dp"
+                android:layout_weight="5"
+                android:gravity="start|center"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:includeFontPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date:"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+
+                    android:layout_gravity="center"
+                   />
+                <TextView
+                    android:id="@+id/date"
+                    android:includeFontPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11/12/2022"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+        <LinearLayout
+            android:layout_weight="5"
+            android:gravity="start|center"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TID:"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+            <TextView
+                android:id="@+id/tid"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11122022"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction No:"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+            <TextView
+                android:id="@+id/trasaction_no"
+                android:gravity="end"
+                android:includeFontPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11122022"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Serial No:"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+            <TextView
+                android:id="@+id/serial_no"
+                android:gravity="end"
+                android:includeFontPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11122022"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiry Date:"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+            <TextView
+                android:id="@+id/expiry_date"
+                android:gravity="end"
+                android:includeFontPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11/12/2022"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+               />
+        </LinearLayout>
+        <TextView
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN CODE"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/pin_code"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1111 1111 1111 1111"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/big_text"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="48dp"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:visibility="gone"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bar CODE"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+
+                android:layout_gravity="start" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/barcode"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bar_code"/>
+        </LinearLayout>
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To recharge your balance, dial *155* PIN CODE #"
+            android:minLines="1"
+            android:gravity="center"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_gravity="start"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/star_line"
+             android:maxLines="1"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Original Copy"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+
+            android:layout_gravity="start"
+           />
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Powered By FM TEL"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"/>
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developed By SPINNER TECH"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="4dp"/>
+
+
+    
+</LinearLayout>
