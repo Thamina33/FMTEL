@@ -1,14 +1,14 @@
 package com.example.fmtel.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.R
 import com.example.fmtel.databinding.ItemSaleTransactionHistoryBinding
-import com.example.fmtel.model.Data
 import com.example.fmtel.model.dailySattlementResponse
 
 class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
@@ -16,7 +16,10 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<dailySattlementResponse.Data>() {
 
-        override fun areItemsTheSame(oldItem: dailySattlementResponse.Data, newItem: dailySattlementResponse.Data): Boolean {
+        override fun areItemsTheSame(
+            oldItem: dailySattlementResponse.Data,
+            newItem: dailySattlementResponse.Data
+        ): Boolean {
             return oldItem.id == newItem.id
 
         }
@@ -25,9 +28,8 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
             oldItem: dailySattlementResponse.Data,
             newItem: dailySattlementResponse.Data
         ): Boolean {
-            return  oldItem == newItem
+            return oldItem == newItem
         }
-
 
 
     }
@@ -72,13 +74,20 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
-            val  binding = ItemSaleTransactionHistoryBinding.bind(itemView)
+            val binding = ItemSaleTransactionHistoryBinding.bind(itemView)
 
             binding.productCode.text = item.product.code
-            binding.date.text=item.date
-            binding.price.text=item.price
-            binding.packageName.text=item.product.name
-            binding.transcastionCode.text=item.product.code
+            binding.date.text = item.date
+            binding.price.text = item.price
+            binding.packageName.text = item.product.name
+            binding.transcastionCode.text = item.product.code
+
+            binding.printBtn.setOnClickListener {
+                binding.printView.price.text = item.price.toString()
+                binding.printView.date.text = item.date.toString()
+                val printMe = PrintMe(binding.root.context)
+                printMe.sendViewToPrinter(binding.printView.printImg)
+            }
 
         }
     }
