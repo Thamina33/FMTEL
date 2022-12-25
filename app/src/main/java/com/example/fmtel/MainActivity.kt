@@ -3,23 +3,23 @@ package com.example.fmtel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.util.Log
+
 import android.view.View
+import androidx.activity.addCallback
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.example.fmtel.Utils.lastLoginDate
 import com.example.fmtel.databinding.ActivityMainBinding
-import com.example.fmtel.databinding.FragmentHomeBinding
-import com.example.fmtel.databinding.FragmentOperationBinding
-import com.example.fmtel.databinding.FragmentSettingsBinding
 import com.example.fmtel.model.ContianerPagerAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.math.log
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +40,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        onBackPressedDispatcher.addCallback(this /* lifecycle owner */) {
+            // Back is pressed... Finishing the activity
+            triggerDialoguer()
 
+        }
 
     }
 
@@ -66,22 +70,28 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
     }
 
+    private fun triggerDialoguer() {
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        if(findNavController(R.id.container_fragment).currentDestination?.id == R.id.homeFragment){
+        //var dialog : AlertDialog =
+        val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+        alertDialogBuilder.setMessage("Are you sure you want to exit?")
+        alertDialogBuilder.setCancelable(false)
 
-
-                if (doubleBackToExitPressedOnce) {
-                    super.onBackPressed()
-                    return
-                }
-
-                this.doubleBackToExitPressedOnce = true
-                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
-
-                Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
-
+        alertDialogBuilder.setPositiveButton(
+            getString(android.R.string.ok)
+        ) { dialog, _ ->
+            dialog.cancel()
+            moveTaskToBack(true);
+            exitProcess(-1)
         }
+        alertDialogBuilder.setNegativeButton("no", null)
+
+        val alertDialog: AlertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+
+
     }
+
+
+
 }
