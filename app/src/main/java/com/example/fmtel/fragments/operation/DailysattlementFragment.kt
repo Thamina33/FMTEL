@@ -18,14 +18,14 @@ import com.example.fmtel.adapter.DailySattlementAdapter
 import com.example.fmtel.adapter.PackageAdapter
 import com.example.fmtel.adapter.ProductAdapter
 import com.example.fmtel.databinding.FragmentDailysattlementBinding
-import com.example.fmtel.model.Data
-import com.example.fmtel.model.PackageListResponse
-import com.example.fmtel.model.ProductListResponse
-import com.example.fmtel.model.DailySalesResponse
+import com.example.fmtel.model.*
 import com.example.fmtel.networking.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
 
@@ -55,12 +55,18 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
             adapter = mAdapter
         }
 
-
-
             loadReport()
-
+            loadProfile()
         binding.printBtn.setOnClickListener {
+
+            val sdf = SimpleDateFormat("'Date:' dd.MM.yyyyy  'Time:' HH:mm:ss")
+            val currentDateandTime = sdf.format(Date())
+
+            binding.printView.currentDate.text = currentDateandTime
+
+            printMe.sendViewToPrinter(binding.printView.printImg)
             printMe.sendViewToPrinter(binding.reportRV)
+            printMe.sendTextToPrinter("\nPowered By FM TEL\nDeveloped By SPINNER TECH\n\n" , 24f, true , false , 1)
 
             findNavController().popBackStack()
         }
@@ -114,6 +120,61 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
 
 
             override fun onFailure(call: Call<DailySalesResponse?>, t: Throwable) {
+
+            }
+
+        })
+
+
+    }
+    private fun loadProfile() {
+        (activity as MainActivity).showLoader()
+        val  profileCall  = ApiProvider.dataApi.shopInformation()
+        profileCall.enqueue(object :Callback <ShopProfileResponse?> {
+            override fun onResponse(
+                call: Call<ShopProfileResponse?>,
+                response: Response<ShopProfileResponse?>
+            ) {
+                // binding.pbar.visibility = View.GONE
+                (activity as MainActivity).hideLoader()
+                if (response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()
+
+                    if (resp != null) {
+
+
+
+                        Log.d("TAG", "onResponse: ${resp.message}")
+
+                        binding.printView.name.text= resp.data.brand_name
+                        binding.printView.userName.text=resp.data.owner_name
+                        binding.printView.userId.text = resp.data.user_id.toString()
+
+
+
+
+                    }
+
+
+                } else if (response.isSuccessful && response.code() == 401) {
+                    //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
+                    Toast.makeText(
+                        requireContext(),
+                        "Token Invalid",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Server Error" + { response.code() },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+            override fun onFailure(call: Call<ShopProfileResponse?>, t: Throwable) {
 
             }
 

@@ -76,17 +76,23 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
             }
             val binding = ItemSaleTransactionHistoryBinding.bind(itemView)
 
-            binding.productCode.text = item.product.code
+            binding.productCode.text = item.product_code
             binding.date.text = item.date
             binding.price.text = item.price
-            binding.packageName.text = item.product.name
-            binding.transcastionCode.text = item.product.code
+            binding.packageName.text = item.product_name
+            binding.transcastionCode.text = item.transaction_id
 
             binding.printBtn.setOnClickListener {
                 binding.printView.price.text = item.price.toString()
                 binding.printView.date.text = item.date.toString()
+                binding.printView.expiryDate.text = item.expiry_date.toString()
+                binding.printView.trasactionNo.text = item.transaction_id.toString()
+                binding.printView.serialNo.text=item.serial_no
+                binding.printView.time.text = item.time
+                binding.printView.tid.text = item.user_id
                 val printMe = PrintMe(binding.root.context)
                 printMe.sendViewToPrinter(binding.printView.printImg)
+//                printMe.sendTextToPrinter("\nPowered By FM TEL\nDeveloped By SPINNER TECH\n\n" , 24f, true , false , 1)
             }
 
         }

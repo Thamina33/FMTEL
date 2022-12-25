@@ -2,7 +2,12 @@ package com.example.fmtel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.fmtel.databinding.ActivityMainBinding
 import com.example.fmtel.databinding.FragmentHomeBinding
@@ -10,21 +15,29 @@ import com.example.fmtel.databinding.FragmentOperationBinding
 import com.example.fmtel.databinding.FragmentSettingsBinding
 import com.example.fmtel.model.ContianerPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var  binding : ActivityMainBinding
     private lateinit var adapter: ContianerPagerAdapter
+    private var doubleBackToExitPressedOnce = false
 //   private lateinit var binding: FragmentHomeBinding
 //   private lateinit var binding: FragmentOperationBinding
 //    private lateinit var binding: FragmentSettingsBinding
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
 
 
@@ -53,4 +66,22 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
     }
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(findNavController(R.id.container_fragment).currentDestination?.id == R.id.homeFragment){
+
+
+                if (doubleBackToExitPressedOnce) {
+                    super.onBackPressed()
+                    return
+                }
+
+                this.doubleBackToExitPressedOnce = true
+                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+                Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+
+        }
+    }
 }

@@ -2,16 +2,14 @@ package com.example.fmtel.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.example.fmtel.MainActivity
 import com.example.fmtel.R
 import com.example.fmtel.adapter.ProductAdapter
@@ -24,6 +22,7 @@ import com.example.fmtel.networking.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
     var avl_bal = 0.0
@@ -43,6 +42,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadBAlance()
+        (binding.productRV.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         mAdapter = ProductAdapter(this , this)
 
         //passing model
@@ -98,7 +98,13 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                         Log.d("TAG", "onResponse: ${resp.message}")
                         productList.clear() ;
                         mAdapter.setBgIage(resp.data.`package`.brand_background_image)
+
+
+                        for(itm in resp.data.products){
+                            itm.qty = 1
+                        }
                         productList.addAll(resp.data.products)
+                      //  Log.d("TAG", "onResponse: ${resp.data.products.first()}")
                          mAdapter.submitList(productList)
 
 
@@ -190,13 +196,21 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                                 , type : String ) {
 
         if(type == "print"){
-            if(item.quantity == 0){
+
+            if(item.stock == 0 ){
+                Toast.makeText(requireContext() , "Stock Not Available." , Toast.LENGTH_LONG).show()
+
+                return
+            }
+
+            if(item.qty == 0 ){
                 Toast.makeText(requireContext() , "Please Add Quantity to select this" , Toast.LENGTH_LONG).show()
             }
             else{
                 val bundle = Bundle()
                 bundle.putSerializable("model" , item)
                 bundle.putSerializable("brandmodel" , repsose?.data?.brand)
+
                 findNavController().navigate(R.id.paymentFragment , bundle)
             }
 
@@ -204,16 +218,16 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
         else if(type == "minus")
         {
 
-            if(item.quantity > 0 ){
-                val newQuantity = item.quantity -1
+            if(item.qty > 0 ){
+                val newQuantity = item.qty -1
 
-                productList[position].quantity = newQuantity
+                productList[position].qty = newQuantity
                 mAdapter.notifyItemChanged(position)
             }
 
         }else if (type == "add"){
-            val newQuantity = item.quantity + 1
-            productList[position].quantity = newQuantity
+            val newQuantity = item.qty + 1
+            productList[position].qty = newQuantity
             mAdapter.notifyItemChanged(position)
         }
 

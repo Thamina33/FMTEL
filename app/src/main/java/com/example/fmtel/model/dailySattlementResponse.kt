@@ -7,10 +7,16 @@ data class dailySattlementResponse(
 ) {
     data class Data(
         val date: String,
+        val time: String,
+        val transaction_id: String,
+        val user_id: String,
         val id: Int,
         val price: String,
-        val product: Product,
-        val quantity: Int
+        val quantity: Int,
+        val product_code: String,
+        val product_name: String,
+        val serial_no: String,
+        val expiry_date: String,
     ): java.io.Serializable {
         data class Product(
             val code: String,
@@ -18,7 +24,7 @@ data class dailySattlementResponse(
             val image: String,
             val name: String,
             val package_id: Int,
-            val price: String
+            val price: String?
         ): java.io.Serializable
     }
 }

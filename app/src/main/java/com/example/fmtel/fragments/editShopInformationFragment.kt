@@ -6,20 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.text.set
 import androidx.navigation.fragment.findNavController
 import com.example.fmtel.MainActivity
-import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentEditShopInformationBinding
-import com.example.fmtel.model.ProductListResponse
 import com.example.fmtel.model.ShopProfileResponse
 import com.example.fmtel.model.UpdateShopInfo
-import com.example.fmtel.model.salesAdd
 import com.example.fmtel.networking.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.BindException
 
 
 class editShopInformationFragment : Fragment() {

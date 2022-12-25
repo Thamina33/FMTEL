@@ -47,5 +47,8 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-
+    <include
+        android:id="@+id/printView"
+        android:visibility="gone"
+        layout="@layout/daily_invoice"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,26 +5,20 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.TimePicker
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.MainActivity
-import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentPaymentReportragmentBinding
 import com.example.fmtel.model.ReportbyDatesResponse
 import com.example.fmtel.networking.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DateFormat
-import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,7 +56,13 @@ class PaymentReportragment : Fragment() {
         binding.endTime.setOnClickListener {
             endgetTime(requireContext())
         }
-        binding.reportBtn.setOnClickListener {
+
+        //current date
+        val sdf = SimpleDateFormat("dd.MM.yyyyy 'Time:' HH:mm:ss")
+        val currentDateandTime = sdf.format(Date())
+        binding.currentDate.text = currentDateandTime
+
+            binding.reportBtn.setOnClickListener {
             val start_d = binding.startDate.text.toString()
             val end_d = binding.endDate.text.toString()
             loadReport(start_d, end_d)
@@ -70,7 +70,11 @@ class PaymentReportragment : Fragment() {
         }
         binding.printBtn.setOnClickListener {
 
+            printMe.sendTextToPrinter("\nPayment Report\n\n" , 32f, true , false , 0)
             printMe.sendViewToPrinter(binding.reportCard)
+            printMe.sendTextToPrinter("Powered By FM TEL\nDeveloped By SPINNER TECH\n\n" , 24f, true , false , 1)
+
+
             findNavController().popBackStack()
         }
 
@@ -185,12 +189,11 @@ class PaymentReportragment : Fragment() {
 
                         binding.reportCard.visibility = View.VISIBLE
                         binding.printBtn.visibility = View.VISIBLE
-
-
-
                         binding.tba.text= resp.data.tba
                         binding.totalamount.text=resp.data.sale_amount.toString()
                         binding.currentBalance.text= resp.data.balance
+
+
 
                     }
 

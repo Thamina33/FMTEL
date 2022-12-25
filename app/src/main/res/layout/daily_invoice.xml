@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:visibility="visible"
+        android:id="@+id/print_img"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:background="#ffffff"
+        android:layout_height="wrap_content" 
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/logo"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_marginTop="@dimen/small_text"
+            android:id="@+id/name"
+        android:includeFontPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:maxLines="1"
+            android:layout_marginBottom="@dimen/small_text"
+        android:textColor="@color/black"
+            android:textStyle="bold"
+        android:textSize="@dimen/extra_big_text"
+        android:gravity="center"
+        />
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daily Settlement Report"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text"
+
+            android:gravity="center"
+           />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/current_date"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="center|start"
+           />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Id: "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center|start"
+                />
+            <TextView
+                android:id="@+id/user_id"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center|start"
+                />
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="center|start"
+            />
+        <TextView
+            android:id="@+id/user_name"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="center|start"
+            />
+    </LinearLayout>
+
+
+
+
+    
+</LinearLayout>

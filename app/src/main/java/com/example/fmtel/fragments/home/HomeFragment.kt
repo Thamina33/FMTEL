@@ -1,12 +1,16 @@
 package com.example.fmtel.fragments.home
 
+import android.R
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,17 +22,19 @@ import com.example.fmtel.databinding.FragmentHomeBinding
 import com.example.fmtel.model.BAnnerResponse
 import com.example.fmtel.model.CategoryListResponse
 import com.example.fmtel.networking.ApiProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : Fragment() {
 
+class HomeFragment : Fragment() {
+   // private var doubleBackToExitPressedOnce = false
     private lateinit var binding: FragmentHomeBinding
     lateinit var categoryRV: RecyclerView
     lateinit var categoryRVAdapter: CategoryAdapter
     lateinit var categoryList: ArrayList<CategoryListResponse.CategoryItem>
-
+    private var doubleBackToExitPressedOnce: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +42,8 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
+
+
         return binding.root
 
     }
@@ -54,15 +62,18 @@ class HomeFragment : Fragment() {
 //            findNavController().navigate(R.id.gamesFragment)
 //        }
 
+
+
         categoryList = ArrayList()
         val  layoutManager = LinearLayoutManager(context)
         binding.categoryRV.layoutManager = layoutManager
         categoryRVAdapter = CategoryAdapter(categoryList, requireContext() , findNavController())
         binding.categoryRV.adapter = categoryRVAdapter
 
-
         loadCategory()
         loadBanner()
+
+
 
     }
 
@@ -70,9 +81,6 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).showLoader()
 
         val  categoryCall  = ApiProvider.dataApi.getCategories()
-
-
-
         categoryCall.enqueue(object : Callback<CategoryListResponse?> {
             override fun onResponse(
                 call: Call<CategoryListResponse?>,
@@ -117,8 +125,6 @@ class HomeFragment : Fragment() {
             }
 
         })
-
-
     }
     private fun loadBanner() {
         val  BAnnerCall  = ApiProvider.dataApi.getBanner()
@@ -171,5 +177,9 @@ class HomeFragment : Fragment() {
 
 
     }
+
+
+
+
 
 }

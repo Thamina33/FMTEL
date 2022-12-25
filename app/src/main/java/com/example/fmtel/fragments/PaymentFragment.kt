@@ -2,24 +2,19 @@ package com.example.fmtel.fragments
 
 import android.os.Bundle
 import android.util.Log
-import com.ahmedelsayed.sunmiprinterutill.PrintMe
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fmtel.MainActivity
-import com.example.fmtel.R
-import com.example.fmtel.SharedPrefManager
-import com.example.fmtel.Utils.Helper
-import com.example.fmtel.Utils.lastLoginDate
-import com.example.fmtel.Utils.userKey
 import com.example.fmtel.databinding.FragmentPaymentBinding
 import com.example.fmtel.model.*
 import com.example.fmtel.networking.ApiProvider
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,7 +55,7 @@ class PaymentFragment : Fragment() {
             //binding.packageName.text = itemModel.name
             binding.packageId.text = itemModel.name
             binding.price.text = itemModel.price
-            binding.pricee.text = itemModel.quantity.toString()
+            binding.pricee.text = itemModel.qty.toString()
 
             Glide.with(requireContext())
                 .load(itemModel?.image)
@@ -68,35 +63,44 @@ class PaymentFragment : Fragment() {
                 .into(binding.logo)
 
             val counter = binding.price.text.toString().toFloat()
-            val itemPriceInInt = itemModel.quantity.toFloat()
+            val itemPriceInInt = itemModel.qty.toFloat()
             val sstotalPrice = counter * itemPriceInInt
             binding.totalPrice.text = sstotalPrice.toString()
             binding.invoicePage.price.text = sstotalPrice.toString()
 
             //tid , transaction id, date, serial no, expiry date
-            binding.invoicePage.tid.text = itemModel.code
-            binding.invoicePage.date.text = itemModel.code
-            binding.invoicePage.expiryDate.text = itemModel.code
-            binding.invoicePage.trasactionNo.text = itemModel.code
-            binding.invoicePage.serialNo.text = itemModel.code
+
+
+
 
 
             //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
         binding.printBtn.setOnClickListener {
 
-         printMe.sendViewToPrinter(binding.invoicePage.printImg)
-         sasles_add(itemModel?.id.toString(), itemModel?.price.toString(), itemModel?.quantity.toString())
+
+
+
+         sasles_add(itemModel?.id.toString(),
+             itemModel?.price.toString(),
+             itemModel?.qty.toString(),
+            printMe)
 
         }
 
     }
 
-    private fun sasles_add(productid: String, price: String, quantity: String) {
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun sasles_add(productid: String,
+                           price: String,
+                           quantity: String,
+                           printMe: PrintMe) {
         (activity as MainActivity).showLoader()
         val salesCall = ApiProvider.dataApi.salesAdd(
-            product_id= productid , price =  price , quantity =  quantity
-        )
+            product_id= productid ,
+            price =  price ,
+            quantity =  quantity
+            )
 
 
 
@@ -109,7 +113,43 @@ class PaymentFragment : Fragment() {
                 (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
-                     findNavController().popBackStack()
+                    // findNavController().popBackStack()
+
+                    for(i in 1..quantity.toInt()){
+
+                            binding.invoicePage.tid.text = resp?.data?.user_id.toString()
+                            binding.invoicePage.date.text = resp?.data?.date.toString()
+                            binding.invoicePage.expiryDate.text =
+                               resp?.data?.codes?.get(i-1)?.expiry_date.toString()
+                            binding.invoicePage.trasactionNo.text = resp?.data?.transaction_id.toString()
+                            binding.invoicePage.serialNo.text =resp?.data?.codes?.get(i-1)?.serial_number.toString()
+                            binding.invoicePage.pinCode.text = resp?.data?.codes?.get(i-1)?.code.toString()
+
+                            printMe.sendViewToPrinter(binding.invoicePage.printImg)
+
+                           // withContext(Dispatchers.Main) {
+
+                        if(quantity.toInt() > 1){
+                            Thread.sleep(1500)
+                        }
+
+                           // }
+                           // delay(500)
+
+
+
+
+
+
+                    }
+
+
+
+
+
+                   
+  //                  printMe.sendViewToPrinter(binding.invoicePage.printImg)
+
 //                    if (resp != null) {
 //
 //                        SharedPrefManager.put(resp.data , userKey)

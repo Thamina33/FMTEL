@@ -37,8 +37,8 @@ class SettingsFragment : Fragment() {
         }
         binding.testprinter.setOnClickListener {
 
-            printMe.sendTextToPrinter("Test Printer" , 32f, true , false , 0)
-            printMe.sendTextToPrinter("Powered By FM TEL \n Developed By SPINNER TECH" , 24f, true , false , 0)
+            printMe.sendTextToPrinter("\nTest Printer\n" , 32f, true , false , 0)
+            printMe.sendTextToPrinter("Powered By FM TEL\nDeveloped By SPINNER TECH" , 24f, true , false , 1)
 //            Toast.makeText(requireContext() , "Processing...." , Toast.LENGTH_LONG).show()
         }
     }

@@ -114,7 +114,7 @@
                 android:textSize="@dimen/small_text"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/txt_clr"
-                android:text="0"
+                android:text="1"
                 />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/increase_btn"

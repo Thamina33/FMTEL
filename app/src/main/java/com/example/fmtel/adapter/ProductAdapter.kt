@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -89,11 +88,12 @@ class ProductAdapter(private val interaction: Interaction? = null ,
 
             binding.packageName.text = item.name
             binding.price.text = item.price
-            var productQty = item.quantity
-            binding.counterTxt.text = "${item.quantity}"
+            var productQty = item.qty
+            binding.counterTxt.text = item.qty.toString()
+           // item.quantity = 1
 
             val prc = item.price.toFloat()
-            val qnt = item.quantity.toFloat()
+            val qnt = item.qty.toInt()
             val total_prc = prc*qnt
 
             binding.printBtn.setOnClickListener {
@@ -138,4 +138,7 @@ class ProductAdapter(private val interaction: Interaction? = null ,
         fun onItemSelected(position: Int, item: ProductItem, type : String)
     }
 }
+
+
+
 
