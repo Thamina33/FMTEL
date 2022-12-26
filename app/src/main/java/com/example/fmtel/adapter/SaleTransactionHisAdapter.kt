@@ -1,8 +1,10 @@
 package com.example.fmtel.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -91,36 +93,40 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
 //                binding.printView.time.text = item.time
 //                binding.printView.tid.text = item.user_id
                 val printMe = PrintMe(binding.root.context)
-                printMe.sendViewToPrinter(binding.printView.printImg)
-//                printMe.sendTextToPrinter("\nPowered By FM TEL\nDeveloped By SPINNER TECH\n\n" , 24f, true , false , 1)
 
-                for(i in 1..item.quantity.toInt()){
+              if(item.quantity == item.codes.size){
+                  for(i in 1..item.quantity.toInt()){
 
-                    binding.printView.tid.text = item.user_id.toString()
-                    binding.printView.date.text = item.date.toString()
-                    binding.printView.expiryDate.text =
-                        item?.codes?.get(i-1)?.expiry_date.toString()
-                    binding.printView.trasactionNo.text = item.transaction_id.toString()
-                    binding.printView.serialNo.text =item?.codes?.get(i-1)?.serial_number.toString()
-                    binding.printView.pinCode.text = item?.codes?.get(i-1)?.code.toString()
+                      Log.d("QUATITY", "bind:${item.quantity}   $i")
 
-                    printMe.sendViewToPrinter(binding.printView.printImg)
+                      binding.printView.tid.text = item.user_id.toString()
+                      binding.printView.date.text = item.date.toString()
+                      binding.printView.expiryDate.text =
+                          item?.codes?.get(i-1)?.expiry_date.toString()
+                      binding.printView.trasactionNo.text = item.transaction_id.toString()
+                      binding.printView.serialNo.text =item?.codes?.get(i-1)?.serial_number.toString()
+                      binding.printView.pinCode.text = item?.codes?.get(i-1)?.code.toString()
 
-                    // withContext(Dispatchers.Main) {
+                      printMe.sendViewToPrinter(binding.printView.printImg)
 
-                    if(item.quantity.toInt() > 1){
-                        Thread.sleep(1500)
-                    }
+                      // withContext(Dispatchers.Main) {
 
-                    // }
-                    // delay(500)
+//                      if(item.quantity > 1){
+//                          Thread.sleep(1500)
+//                      }
 
-
-
+                      // }
+                      // delay(500)
 
 
 
-                }
+
+
+
+                  }
+              }else {
+                  Toast.makeText(context , "proper Codes not received" , Toast.LENGTH_LONG).show()
+              }
             }
 
         }

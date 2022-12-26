@@ -3,6 +3,7 @@ package com.example.fmtel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 
 import android.view.View
 import androidx.activity.addCallback
@@ -40,21 +41,44 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        onBackPressedDispatcher.addCallback(this /* lifecycle owner */) {
-            // Back is pressed... Finishing the activity
-
-            if(findNavController(R.id.container_fragment).currentDestination?.id == R.id.homeFragment){
-                triggerDialoguer()
-            }else {
-                findNavController(R.id.container_fragment).popBackStack()
-            }
-
-
-        }
+//        onBackPressedDispatcher.addCallback(this /* lifecycle owner */) {
+//            // Back is pressed... Finishing the activity
+//
+//            if(findNavController(R.id.container_fragment).currentDestination?.id == R.id.homeFragment){
+//                triggerDialoguer()
+//            }else {
+//                findNavController(R.id.container_fragment).popBackStack()
+//            }
+//
+//
+//        }
 
     }
 
+    override fun onBackPressed() {
 
+        val navigationController = findNavController(R.id.container_fragment)
+        Log.d("TAG", "onBackPressed: pppppp${navigationController.currentDestination?.id}")
+
+        when (navigationController.currentDestination?.id) {
+            R.id.mainHostFragment -> {
+                triggerDialoguer()
+            }
+
+//            R.id.dashboardFragment -> {
+//
+//                val navOptions = NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+//                Navigation.findNavController(
+//                    this,
+//                    R.id.nav_host_container
+//                ).navigate(R.id.choiceFragment, null, navOptions)
+//            }
+            else -> {
+                super.onBackPressed()
+            }
+        }
+
+    }
 //    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
 //        adapter = ContianerPagerAdapter(this)
