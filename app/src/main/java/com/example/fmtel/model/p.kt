@@ -1,6 +1,6 @@
 package com.example.fmtel.model
 
-data class dailySattlementResponse(
+data class p(
     val `data`: List<Data>,
     val message: String,
     val status: Boolean
@@ -23,21 +23,4 @@ data class dailySattlementResponse(
             val serial_number: String
         )
     }
-}
-
-
-
-data class DailySalesResponse(
-    val `data`: List<Data>,
-    val message: String,
-    val status: Boolean
-) {
-    data class Data(
-        val date: String,
-        val id: Int,
-        val price: String,
-        val product: String,
-        val quantity: Int,
-        val `package` : String
-    ): java.io.Serializable
 }

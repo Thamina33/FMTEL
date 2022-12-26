@@ -74,8 +74,6 @@ class DailySattlementAdapter(private val interaction: Interaction? = null) :
             binding.brandName.text = item.product
             binding.price.text = item.price
             binding.quantity.text = item.quantity.toString()
-
-
         }
 
 

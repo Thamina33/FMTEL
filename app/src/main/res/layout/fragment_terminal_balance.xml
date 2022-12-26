@@ -133,6 +133,7 @@
                     android:weightSum="1"
                     android:layout_height="wrap_content">
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/ok_btn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="ok"
@@ -146,6 +147,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/print_btn"
                         android:layout_width="0dp"
                         android:layout_marginLeft="4dp"
                         android:layout_height="wrap_content"
@@ -162,6 +164,9 @@
 
         </com.google.android.material.card.MaterialCardView>
     </ScrollView>
-
+    <include
+        android:id="@+id/printView"
+        android:visibility="gone"
+        layout="@layout/invoice_terminal_balance"/>
 
 </LinearLayout>

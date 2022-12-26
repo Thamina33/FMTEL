@@ -42,7 +42,13 @@ class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this /* lifecycle owner */) {
             // Back is pressed... Finishing the activity
-            triggerDialoguer()
+
+            if(findNavController(R.id.container_fragment).currentDestination?.id == R.id.homeFragment){
+                triggerDialoguer()
+            }else {
+                findNavController(R.id.container_fragment).popBackStack()
+            }
+
 
         }
 

@@ -20,6 +20,12 @@ class Helper {
 
 
         }
+
+        fun getCurrentTimeInMilli(): Long {
+            val tiem = System.currentTimeMillis()
+
+            return tiem
+        }
     }
 
 }

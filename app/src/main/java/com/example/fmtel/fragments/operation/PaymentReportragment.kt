@@ -70,7 +70,7 @@ class PaymentReportragment : Fragment() {
         }
         binding.printBtn.setOnClickListener {
 
-            printMe.sendTextToPrinter("\nPayment Report\n\n" , 32f, true , false , 0)
+            printMe.sendTextToPrinter("FM TEL\nPayment Report\n\n" , 32f, true , false , 0)
             printMe.sendViewToPrinter(binding.reportCard)
             printMe.sendTextToPrinter("Powered By FM TEL\nDeveloped By SPINNER TECH\n\n" , 24f, true , false , 1)
 

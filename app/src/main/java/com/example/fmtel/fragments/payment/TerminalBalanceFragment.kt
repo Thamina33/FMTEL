@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.example.fmtel.R
 import com.example.fmtel.databinding.FragmentTerminalBalanceBinding
 import com.example.fmtel.model.BalanceResponse
@@ -15,6 +17,8 @@ import com.example.fmtel.networking.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TerminalBalanceFragment : Fragment() {
@@ -30,7 +34,19 @@ private lateinit var binding: FragmentTerminalBalanceBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val printMe = PrintMe(binding.root.context)
         loadBAlance()
+
+        val sdf = SimpleDateFormat("dd.MM.yyyyy 'Time:' HH:mm:ss")
+        val currentDateandTime = sdf.format(Date())
+        binding.printView.date.text = currentDateandTime
+
+        binding.printBtn.setOnClickListener {
+            printMe.sendViewToPrinter(binding.printView.printImg)
+        }
+        binding.okBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun loadBAlance() {
@@ -47,11 +63,14 @@ private lateinit var binding: FragmentTerminalBalanceBinding
                     if (resp != null) {
 
                         Log.d("TAG", "onResponse: ${resp.message}")
-
+                        val printMe = PrintMe(binding.root.context)
                         binding.availableBalance.text= resp.data.available
                         binding.currentBalance.text= resp.data.current
                         binding.receivedBalance.text= resp.data.reserved
 
+                        binding.printView.availableBalance.text = resp.data.available
+                        binding.printView.currentBalance.text= resp.data.current
+                        binding.printView.receivedBalance.text= resp.data.reserved
 
 
                     }

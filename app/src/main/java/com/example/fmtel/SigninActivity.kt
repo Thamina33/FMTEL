@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.fmtel.R
 import com.example.fmtel.Utils.Helper
 import com.example.fmtel.Utils.lastLoginDate
+
 import com.example.fmtel.Utils.userKey
 import com.example.fmtel.databinding.ActivityMainBinding
 import com.example.fmtel.databinding.ActivitySigninBinding
@@ -66,13 +67,16 @@ class SigninActivity : AppCompatActivity() {
     }
 
     fun checkForLogin(){
-        val lastLoginDate = SharedPrefManager.get(lastLoginDate) as String?
-        if(lastLoginDate == null || lastLoginDate.isNullOrEmpty()){
+        val lastLoginTime = SharedPrefManager.get(lastLoginDate) as Long?
+        if(lastLoginTime == null){
             // this is the first login
             // nothing
         }else {
+            val currentTime = Helper.getCurrentTimeInMilli()
 
-            if(Helper.getCurrentDate() == lastLoginDate){
+            val timeDiff = currentTime - lastLoginTime
+
+            if(timeDiff < 21600000){
                 goToHome()
             }
 
@@ -110,7 +114,7 @@ class SigninActivity : AppCompatActivity() {
                     if (resp != null) {
 
                         SharedPrefManager.put(resp.data , userKey)
-                        SharedPrefManager.put(Helper.getCurrentDate() , lastLoginDate)
+                        SharedPrefManager.put(Helper.getCurrentTimeInMilli(), lastLoginDate)
 
                        goToHome()
 
