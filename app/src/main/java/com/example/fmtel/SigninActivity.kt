@@ -76,7 +76,7 @@ class SigninActivity : AppCompatActivity() {
 
             val timeDiff = currentTime - lastLoginTime
 
-            if(timeDiff < 21600000){
+            if(timeDiff <= 21600000){
                 goToHome()
             }
 

@@ -31,15 +31,12 @@ class OperationFragment : Fragment() {
         binding.payentReport.setOnClickListener {
             findNavController().navigate(R.id.paymentReportragment)
         }
-
-
         binding.dailySattlementReport.setOnClickListener {
             findNavController().navigate(R.id.dailysattlementFragment)
         }
         binding.saleTransactionHis.setOnClickListener {
             findNavController().navigate(R.id.saleTransactionHistoryFragment)
         }
-
         binding.logOut.setOnClickListener {
 
             SharedPrefManager.nukeAllData()
@@ -53,6 +50,8 @@ class OperationFragment : Fragment() {
         }
 
 
+
+       // binding.txt2.text = binding.txt1.text.chunked(4).joinToString(separator  = " ")
 
         }
 

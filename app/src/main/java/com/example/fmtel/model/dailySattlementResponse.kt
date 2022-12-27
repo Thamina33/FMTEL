@@ -13,6 +13,8 @@ data class dailySattlementResponse(
         val product_name: String,
         val quantity: Int,
         val time: String,
+        val brand_name: String,
+        val recharge_message: String,
         val transaction_id: String,
         val user_id: Int
     ) {

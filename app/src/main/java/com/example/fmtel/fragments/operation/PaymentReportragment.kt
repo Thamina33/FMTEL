@@ -85,19 +85,21 @@ class PaymentReportragment : Fragment() {
 
     private fun openDatePcker() {
         val cal = Calendar.getInstance()
-        val y = cal.get(Calendar.YEAR)
-        val m = cal.get(Calendar.MONTH)
         val d = cal.get(Calendar.DAY_OF_MONTH)
+
+        val m = cal.get(Calendar.MONTH)
+        val y = cal.get(Calendar.YEAR)
+
 
 
         val datepickerdialog = DatePickerDialog(
             requireContext(),
-            { view, year, monthOfYear, dayOfMonth ->
+            { view,dayOfMonth , monthOfYear, year ->
                 var startmon = monthOfYear + 1
 
                 binding.startDate.text = "$year/$startmon/$dayOfMonth"
 
-            }, y, m, d
+            }, d, m, y
         )
 
 

@@ -1,5 +1,6 @@
 package com.example.fmtel.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ahmedelsayed.sunmiprinterutill.PrintMe
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -68,25 +70,57 @@ class PaymentFragment : Fragment() {
             binding.totalPrice.text = sstotalPrice.toString()
             binding.invoicePage.price.text = sstotalPrice.toString()
 
+
+
             //tid , transaction id, date, serial no, expiry date
 
 
 
+            binding.printBtn.setOnClickListener {
 
+                val itemPriceInInt = itemModel.qty.toFloat()
+                val sstotalPrice = counter * itemPriceInInt
+                if (sstotalPrice >= 150){
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("Alert")
+                    builder.setMessage("Total price is avobe 150 SAR. Are you sure want to continue")
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+                    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+
+                        sasles_add(itemModel?.id.toString(),
+                            itemModel?.price.toString(),
+                            itemModel?.qty.toString(),
+                            printMe)
+
+
+                    }
+
+                    builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+                        dialog.dismiss()
+                    }
+
+                    builder.show()
+                }
+
+                else {
+
+
+                    sasles_add(itemModel?.id.toString(),
+                        itemModel?.price.toString(),
+                        itemModel?.qty.toString(),
+                        printMe)
+                }
+
+
+
+            }
 
             //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
         }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
-        binding.printBtn.setOnClickListener {
 
-
-
-
-         sasles_add(itemModel?.id.toString(),
-             itemModel?.price.toString(),
-             itemModel?.qty.toString(),
-            printMe)
-
-        }
 
     }
 
@@ -115,15 +149,19 @@ class PaymentFragment : Fragment() {
                     val resp = response.body()
                     // findNavController().popBackStack()
 
+
+
                     for(i in 1..quantity.toInt()){
 
+                           binding.invoicePage.price.text = resp?.data?.product_name.toString()
+                           binding.invoicePage.rechargeMsg.text= resp?.data?.recharge_message.toString()
                             binding.invoicePage.tid.text = resp?.data?.user_id.toString()
                             binding.invoicePage.date.text = resp?.data?.date.toString()
                             binding.invoicePage.expiryDate.text =
                                resp?.data?.codes?.get(i-1)?.expiry_date.toString()
                             binding.invoicePage.trasactionNo.text = resp?.data?.transaction_id.toString()
                             binding.invoicePage.serialNo.text =resp?.data?.codes?.get(i-1)?.serial_number.toString()
-                            binding.invoicePage.pinCode.text = resp?.data?.codes?.get(i-1)?.code.toString()
+                            binding.invoicePage.pinCode.text = resp?.data?.codes?.get(i-1)?.code.toString().chunked(4).joinToString(" ")
 
                             printMe.sendViewToPrinter(binding.invoicePage.printImg)
 
@@ -142,6 +180,7 @@ class PaymentFragment : Fragment() {
 
 
                     }
+                    findNavController().popBackStack()
 
 
 

@@ -152,6 +152,28 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/small_text"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/txt_clr_grey"
+                android:layout_marginTop="24dp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/small_text"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/txt_clr_grey"
+                android:layout_marginTop="24dp"
+                android:text=""
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

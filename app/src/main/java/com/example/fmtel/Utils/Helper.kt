@@ -10,7 +10,7 @@ class Helper {
         fun getCurrentDate() : String {
            // var date = ""
 
-            val formatter = SimpleDateFormat("yyyy-MM-dd")
+            val formatter = SimpleDateFormat("dd-mm-yyyy")
             val date = Date()
             val current = formatter.format(date)
 

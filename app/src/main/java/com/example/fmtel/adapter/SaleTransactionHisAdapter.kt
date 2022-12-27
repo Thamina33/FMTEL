@@ -78,6 +78,7 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
             }
             val binding = ItemSaleTransactionHistoryBinding.bind(itemView)
 
+
             binding.quantity.text = item.quantity.toString() + " Cards"
             binding.date.text = item.date
             binding.price.text = item.price
@@ -98,14 +99,16 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
                   for(i in 1..item.quantity.toInt()){
 
                       Log.d("QUATITY", "bind:${item.quantity}   $i")
-
+                      binding.printView.BrandName.text = item.brand_name
+                      binding.printView.BrandName.text = item.recharge_message
+                      binding.printView.price.text = item.product_name
                       binding.printView.tid.text = item.user_id.toString()
                       binding.printView.date.text = item.date.toString()
                       binding.printView.expiryDate.text =
                           item?.codes?.get(i-1)?.expiry_date.toString()
                       binding.printView.trasactionNo.text = item.transaction_id.toString()
                       binding.printView.serialNo.text =item?.codes?.get(i-1)?.serial_number.toString()
-                      binding.printView.pinCode.text = item?.codes?.get(i-1)?.code.toString()
+                      binding.printView.pinCode.text = item?.codes?.get(i-1)?.code.toString().chunked(4).joinToString(" ")
 
                       printMe.sendViewToPrinter(binding.printView.printImg)
 
