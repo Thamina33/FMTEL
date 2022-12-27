@@ -89,7 +89,7 @@ class TelecommunicationOperatorFragment : Fragment() {
                     }
 
 
-                } else if (response.isSuccessful && response.code() == 401) {
+                } else if ( response.code() == 401) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         requireContext(),
@@ -99,7 +99,7 @@ class TelecommunicationOperatorFragment : Fragment() {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }

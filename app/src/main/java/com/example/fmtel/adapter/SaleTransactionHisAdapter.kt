@@ -100,7 +100,7 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
 
                       Log.d("QUATITY", "bind:${item.quantity}   $i")
                       binding.printView.BrandName.text = item.brand_name
-                      binding.printView.BrandName.text = item.recharge_message
+                      binding.printView.rechargeMsg.text = item.recharge_message
                       binding.printView.price.text = item.product_name
                       binding.printView.tid.text = item.user_id.toString()
                       binding.printView.date.text = item.date.toString()

@@ -153,6 +153,8 @@ class PaymentFragment : Fragment() {
 
                     for(i in 1..quantity.toInt()){
 
+
+
                            binding.invoicePage.price.text = resp?.data?.product_name.toString()
                            binding.invoicePage.rechargeMsg.text= resp?.data?.recharge_message.toString()
                             binding.invoicePage.tid.text = resp?.data?.user_id.toString()
