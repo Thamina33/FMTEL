@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     companion object {
-        val ROOT_URL: String = "https://fmtel.spinnertechltd.com/api/"   //"http://192.168.0.138:8000/api/v1/"
+        val ROOT_URL: String = "https://fmtel.online/api/"   //"http://192.168.0.138:8000/api/v1/"
 //        val IMAGE_URL: String =
 //            " "
     }

@@ -111,7 +111,7 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }

@@ -129,7 +129,7 @@ class PaymentFragment : Fragment() {
                            price: String,
                            quantity: String,
                            printMe: PrintMe) {
-        (activity as MainActivity).showLoader()
+        binding.pbar.visibility = View.VISIBLE
         val salesCall = ApiProvider.dataApi.salesAdd(
             product_id= productid ,
             price =  price ,
@@ -143,7 +143,7 @@ class PaymentFragment : Fragment() {
                 call: Call<salesAdd?>,
                 response: Response<salesAdd?>
             ) {
-                // binding.pbar.visibility = View.GONE
+                binding.pbar.visibility = View.GONE
                 (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
@@ -214,7 +214,7 @@ class PaymentFragment : Fragment() {
                 else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -263,7 +263,7 @@ class PaymentFragment : Fragment() {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }

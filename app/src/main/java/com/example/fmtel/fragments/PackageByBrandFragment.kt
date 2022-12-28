@@ -68,7 +68,7 @@ class PackageByBrandFragment : Fragment() {
 
     }
     private fun loadPackage(id: Int) {
-        (activity as MainActivity).showLoader()
+        binding.pbar.visibility = View.INVISIBLE
         val  BrandCall  = ApiProvider.dataApi.getPackageByBrand(brandID = id.toString())
 
 
@@ -78,8 +78,9 @@ class PackageByBrandFragment : Fragment() {
                 call: Call<PackageListResponse?>,
                 response: Response<PackageListResponse?>
             ) {
-                // binding.pbar.visibility = View.GONE
-                (activity as MainActivity).hideLoader()
+                binding.pbar.visibility = View.GONE
+                    //(activity as MainActivity).hideLoader()
+
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
 
@@ -104,7 +105,7 @@ class PackageByBrandFragment : Fragment() {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -153,7 +154,7 @@ class PackageByBrandFragment : Fragment() {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error" ,
                         Toast.LENGTH_LONG
                     ).show()
                 }

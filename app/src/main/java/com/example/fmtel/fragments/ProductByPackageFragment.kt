@@ -78,7 +78,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
 
 
     private fun loadProduct(id: Int) {
-        (activity as MainActivity).showLoader()
+        binding.pbar.visibility = View.VISIBLE
         val  BrandCall  = ApiProvider.dataApi.getProductByPackage(packageID = id.toString())
 
 
@@ -88,8 +88,8 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                 call: Call<ProductListResponse?>,
                 response: Response<ProductListResponse?>
             ) {
-                // binding.pbar.visibility = View.GONE
-                (activity as MainActivity).hideLoader()
+                binding.pbar.visibility = View.GONE
+               // (activity as MainActivity).hideLoader()
                 if (response.isSuccessful && response.code() == 200) {
                     val resp = response.body()
 
@@ -121,7 +121,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -171,7 +171,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error" ,
                         Toast.LENGTH_LONG
                     ).show()
                 }
