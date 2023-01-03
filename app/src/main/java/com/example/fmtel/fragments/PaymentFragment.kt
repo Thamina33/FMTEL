@@ -45,7 +45,7 @@ class PaymentFragment : Fragment() {
         if (brandModel != null){
 
             binding.packageName.text = brandModel.name
-            binding.invoicePage.BrandName.text = brandModel.name
+            //binding.invoicePage.BrandName.text = brandModel.name
             Glide.with(requireContext())
             .load(brandModel.background_image)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
@@ -68,7 +68,7 @@ class PaymentFragment : Fragment() {
             val itemPriceInInt = itemModel.qty.toFloat()
             val sstotalPrice = counter * itemPriceInInt
             binding.totalPrice.text = sstotalPrice.toString()
-            binding.invoicePage.price.text = sstotalPrice.toString()
+//            binding.invoicePage.price.text = sstotalPrice.toString()
 
 
 
@@ -153,8 +153,8 @@ class PaymentFragment : Fragment() {
 
                     for(i in 1..quantity.toInt()){
 
-
-
+                            binding.invoicePage.BrandName.text = resp?.data?.brand_name.toString()
+                           binding.invoicePage.time.text = resp?.data?.time.toString()
                            binding.invoicePage.price.text = resp?.data?.product_name.toString()
                            binding.invoicePage.rechargeMsg.text= resp?.data?.recharge_message.toString()
                             binding.invoicePage.tid.text = resp?.data?.user_id.toString()
