@@ -106,6 +106,7 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                         productList.addAll(resp.data.products)
                       //  Log.d("TAG", "onResponse: ${resp.data.products.first()}")
                          mAdapter.submitList(productList)
+                        //Log.d("TAG", "onResponse: ${mAdapter.itemCount} ")
 
 
                     }

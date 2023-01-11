@@ -7,9 +7,8 @@
     tools:context=".fragments.ProductByPackageFragment">
 
     <LinearLayout
-        android:layout_gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <Toolbar
             app:layout_constraintTop_toTopOf="parent"
@@ -81,8 +80,8 @@
         </Toolbar>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productRV"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
