@@ -118,8 +118,8 @@ class PaymentFragment : Fragment() {
 
             }
 
-            //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
-        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
+            //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_SHORT).show()
+        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_SHORT).show()
 
 
     }
@@ -153,6 +153,8 @@ class PaymentFragment : Fragment() {
 
                     for(i in 1..quantity.toInt()){
 
+
+
                             binding.invoicePage.BrandName.text = resp?.data?.brand_name.toString()
                            binding.invoicePage.time.text = resp?.data?.time.toString()
                            binding.invoicePage.price.text = resp?.data?.product_name.toString()
@@ -165,6 +167,7 @@ class PaymentFragment : Fragment() {
                             binding.invoicePage.serialNo.text =resp?.data?.codes?.get(i-1)?.serial_number.toString()
                             binding.invoicePage.pinCode.text = resp?.data?.codes?.get(i-1)?.code.toString().chunked(4).joinToString(" ")
 
+                            Thread.sleep(1500)
                             printMe.sendViewToPrinter(binding.invoicePage.printImg)
 
                            // withContext(Dispatchers.Main) {
@@ -208,14 +211,14 @@ class PaymentFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "This product is already sold!",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
                 else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -258,13 +261,13 @@ class PaymentFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

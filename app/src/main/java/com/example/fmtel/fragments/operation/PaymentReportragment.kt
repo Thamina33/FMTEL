@@ -85,21 +85,18 @@ class PaymentReportragment : Fragment() {
 
     private fun openDatePcker() {
         val cal = Calendar.getInstance()
-        val d = cal.get(Calendar.DAY_OF_MONTH)
-
-        val m = cal.get(Calendar.MONTH)
         val y = cal.get(Calendar.YEAR)
-
-
+        val m = cal.get(Calendar.MONTH)
+        val d = cal.get(Calendar.DAY_OF_MONTH)
 
         val datepickerdialog = DatePickerDialog(
             requireContext(),
-            { view,dayOfMonth , monthOfYear, year ->
+            { view, year, monthOfYear, dayOfMonth ->
                 var startmon = monthOfYear + 1
 
                 binding.startDate.text = "$year/$startmon/$dayOfMonth"
 
-            }, d, m, y
+            }, y, m, d
         )
 
 
@@ -205,7 +202,7 @@ class PaymentReportragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else if (response.code() == 404) {
                     binding.reportCard.visibility = View.INVISIBLE
@@ -213,14 +210,14 @@ class PaymentReportragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "No sales available within this period",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
                 else{
                     Toast.makeText(
                         requireContext(),
                         "Input Data Properly",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

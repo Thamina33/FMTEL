@@ -84,7 +84,6 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
             binding.price.text = item.price
             binding.packageName.text = item.product_name
             binding.transcastionCode.text = item.transaction_id
-
             binding.printBtn.setOnClickListener {
 //                binding.printView.price.text = item.price.toString()
 //                binding.printView.date.text = item.date.toString()
@@ -97,20 +96,21 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
 
               if(item.quantity == item.codes.size){
                   for(i in 1..item.quantity.toInt()){
-
                       Log.d("QUATITY", "bind:${item.quantity}   $i")
+                      binding.printView.time.text = item.time
                       binding.printView.BrandName.text = item.brand_name
                       binding.printView.rechargeMsg.text = item.recharge_message
                       binding.printView.price.text = item.product_name
                       binding.printView.tid.text = item.user_id.toString()
                       binding.printView.date.text = item.date.toString()
-                      binding.printView.expiryDate.text =
-                          item?.codes?.get(i-1)?.expiry_date.toString()
+                      binding.printView.expiryDate.text = item?.codes?.get(i-1)?.expiry_date.toString()
                       binding.printView.trasactionNo.text = item.transaction_id.toString()
                       binding.printView.serialNo.text =item?.codes?.get(i-1)?.serial_number.toString()
                       binding.printView.pinCode.text = item?.codes?.get(i-1)?.code.toString().chunked(4).joinToString(" ")
 
+                      Thread.sleep(1500)
                       printMe.sendViewToPrinter(binding.printView.printImg)
+                      
 
                       // withContext(Dispatchers.Main) {
 
@@ -128,7 +128,7 @@ class SaleTransactionHisAdapter(private val interaction: Interaction? = null) :
 
                   }
               }else {
-                  Toast.makeText(context , "proper Codes not received" , Toast.LENGTH_LONG).show()
+                  Toast.makeText(context , "proper Codes not received" , Toast.LENGTH_SHORT).show()
               }
             }
 

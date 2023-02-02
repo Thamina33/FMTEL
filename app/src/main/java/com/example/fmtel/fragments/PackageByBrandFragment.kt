@@ -62,8 +62,8 @@ class PackageByBrandFragment : Fragment() {
             binding.brandName.text = model.name
 
             loadPackage(model.id)
-          //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
-        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
+          //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_SHORT).show()
+        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_SHORT).show()
 
 
     }
@@ -100,13 +100,13 @@ class PackageByBrandFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -149,13 +149,13 @@ class PackageByBrandFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error" ,
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

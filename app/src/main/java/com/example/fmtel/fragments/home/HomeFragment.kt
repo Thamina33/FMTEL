@@ -107,13 +107,13 @@ class HomeFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

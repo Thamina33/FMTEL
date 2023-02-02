@@ -102,10 +102,10 @@ class ProductAdapter(private val interaction: Interaction? = null ,
                     if(fragment.getBalance() > total_prc){
                         interaction?.onItemSelected(adapterPosition, item , "print")
                     }else {
-                        Toast.makeText(itemView.context , "Your Balance is low" , Toast.LENGTH_LONG).show()
+                        Toast.makeText(itemView.context , "Your Balance is low" , Toast.LENGTH_SHORT).show()
                     }
                 }else {
-                    Toast.makeText(itemView.context , "Something went wrong." , Toast.LENGTH_LONG).show()
+                    Toast.makeText(itemView.context , "Something went wrong." , Toast.LENGTH_SHORT).show()
 
                 }
             }

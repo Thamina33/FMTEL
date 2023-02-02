@@ -67,7 +67,7 @@ class editShopInformationFragment : Fragment() {
 //            binding.totalPrice.text = sstotalPrice.toString()
 
             //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
-        } else Toast.makeText(requireContext(), "Null data not found", Toast.LENGTH_LONG).show()
+        } else Toast.makeText(requireContext(), "Null data not found", Toast.LENGTH_SHORT).show()
         binding.UpdateBtn.setOnClickListener {
 
             val brand_name = binding.shopName.text.toString()
@@ -126,13 +126,13 @@ class editShopInformationFragment : Fragment() {
                         Toast.makeText(
                             requireContext(),
                             "Profile Updated",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_SHORT
                         ).show()
 
                     }
                     findNavController().popBackStack()
 
-                } else if (response.isSuccessful && response.code() == 401) {
+                } else if (response.code() == 401) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         requireContext(),
@@ -143,7 +143,7 @@ class editShopInformationFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

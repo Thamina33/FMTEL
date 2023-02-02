@@ -17,21 +17,21 @@
             android:text=""
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
-            android:textSize="72sp"
+            android:textSize="56sp"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"/>
-        <TextView
-            android:layout_marginTop="4dp"
-            android:includeFontPadding="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/star_line"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text"
-
-            android:gravity="center"
-           />
+    <TextView
+        android:layout_marginTop="4dp"
+        android:includeFontPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/star_line"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text"
+        android:gravity="center"
+        />
         <TextView
             android:id="@+id/price"
             android:textStyle="bold"
@@ -55,22 +55,23 @@
 
             android:layout_gravity="center"
            />
-        <TextView
-            android:layout_marginTop="4dp"
-            android:includeFontPadding="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/star_line"
-             android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text"
-            android:gravity="center"
-           />
+    <TextView
+        android:layout_marginTop="4dp"
+        android:includeFontPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/star_line"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text"
+        android:gravity="center"
+        />
         <LinearLayout
                 android:layout_marginTop="4dp"
                 android:layout_weight="5"
                 android:gravity="start|center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
@@ -96,29 +97,36 @@
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:includeFontPadding="false"
-                android:text="Time:"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/time"
-                android:includeFontPadding="false"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="11/12/2022"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                />
+                android:gravity="end|center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="Time:"
+                    android:layout_marginStart="24dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/time"
+                    android:includeFontPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11/12/2022"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
             </LinearLayout>
         <LinearLayout
             android:layout_marginTop="2dp"
@@ -313,18 +321,18 @@
             android:textStyle="bold"
             android:layout_gravity="start"
             android:layout_marginTop="4dp"/>
-        <TextView
-            android:includeFontPadding="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/star_line"
-             android:maxLines="1"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="@color/black"
-           android:textSize="14sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginTop="8dp"/>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/star_line"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text"
+        android:gravity="center"
+        />
         <TextView
             android:includeFontPadding="false"
             android:layout_width="wrap_content"

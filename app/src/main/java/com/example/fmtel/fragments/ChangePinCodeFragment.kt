@@ -90,26 +90,26 @@ class ChangePinCodeFragment : Fragment() {
                         Toast.makeText(
                             requireContext(),
                             "Pin Updated Please Login with new PIN CODE",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_SHORT
                         ).show()
                         goForogin()
 
                     }
 
 
-                } else if (response.isSuccessful && response.code() == 403) {
+                } else if (response.code() == 403) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         requireContext(),
                         "Old Pin Code doesn't match",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
                 else  {
                     Toast.makeText(
                         requireContext(),
                         "Server Error" ,
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 

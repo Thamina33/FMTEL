@@ -69,8 +69,8 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
         if(model != null){
             binding.packageName.text = model.name
             loadProduct(model.id)
-            //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_LONG).show()
-        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_LONG).show()
+            //  Toast.makeText(requireContext() , model.name , Toast.LENGTH_SHORT).show()
+        }else   Toast.makeText(requireContext() , "Null data not found" , Toast.LENGTH_SHORT).show()
 
 
     }
@@ -117,13 +117,13 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -167,13 +167,13 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error" ,
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -199,13 +199,13 @@ class ProductByPackageFragment : Fragment() , ProductAdapter.Interaction {
         if(type == "print"){
 
             if(item.stock == 0 ){
-                Toast.makeText(requireContext() , "Stock Not Available." , Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext() , "Stock Out" , Toast.LENGTH_SHORT).show()
 
                 return
             }
 
             if(item.qty == 0 ){
-                Toast.makeText(requireContext() , "Please Add Quantity to select this" , Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext() , "Please Add Quantity to select this" , Toast.LENGTH_SHORT).show()
             }
             else{
                 val bundle = Bundle()

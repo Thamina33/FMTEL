@@ -21,7 +21,7 @@
         android:includeFontPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="FM TEL"
         android:maxLines="1"
             android:layout_marginBottom="@dimen/small_text"
         android:textColor="@color/black"

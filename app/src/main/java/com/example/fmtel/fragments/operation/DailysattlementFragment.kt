@@ -106,13 +106,13 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
                     Toast.makeText(
                         requireContext(),
                         "Token Invalid",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Server Error",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -156,7 +156,7 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
                     }
 
 
-                } else if (response.isSuccessful && response.code() == 401) {
+                } else if (response.code() == 401) {
                     //Helper.showErrorMsg("Server Error ${response.code()}", requireContext())
                     Toast.makeText(
                         requireContext(),
@@ -166,7 +166,7 @@ class DailysattlementFragment : Fragment(),DailySattlementAdapter.Interaction {
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Server Error" + { response.code() },
+                        "Server Error",
                         Toast.LENGTH_LONG
                     ).show()
                 }
